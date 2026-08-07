@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Mail } from "lucide-react";
 import {
   INDUSTRY_OPTIONS,
   EMPLOYEE_OPTIONS,
@@ -11,6 +11,7 @@ import {
   HONEYPOT_FIELD_NAME,
   type AuditRequestPayload,
 } from "@/lib/audit";
+import { ENQUIRIES_EMAIL, ENQUIRIES_MAILTO } from "@/lib/site";
 import Reveal from "./Reveal";
 
 const INITIAL_FORM: AuditRequestPayload = {
@@ -141,6 +142,13 @@ export default function AuditForm() {
             Book a free automation audit and we&rsquo;ll find the one process
             worth fixing first — and show you what it&rsquo;s worth.
           </p>
+          <a
+            href={ENQUIRIES_MAILTO}
+            className="mt-4 inline-flex items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-navy"
+          >
+            <Mail className="h-4 w-4" aria-hidden="true" />
+            Prefer email? Reach us at {ENQUIRIES_EMAIL}
+          </a>
         </Reveal>
 
         <Reveal>

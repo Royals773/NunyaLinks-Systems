@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Logo } from "./Logo";
 
 const NAV_LINKS = [
   { label: "What We Do", href: "#what-we-do" },
@@ -73,11 +74,8 @@ export default function Header() {
           scrolled ? "py-3" : "py-5"
         }`}
       >
-        <a
-          href="#top"
-          className="text-lg font-bold tracking-tight text-navy sm:text-xl"
-        >
-          NunyaLink <span className="text-accent">Systems</span>
+        <a href="#top" aria-label="NunyaLink Systems — back to top">
+          <Logo />
         </a>
 
         <nav
