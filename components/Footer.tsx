@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Mail } from "lucide-react";
 import { Logo } from "./Logo";
 import { ENQUIRIES_EMAIL, ENQUIRIES_MAILTO } from "@/lib/site";
@@ -24,19 +25,22 @@ export default function Footer() {
             {ENQUIRIES_EMAIL}
           </a>
         </div>
-        <nav aria-label="Footer" className="flex gap-6 text-sm">
-          <a href="#what-we-do" className="hover:text-white">
+        <nav aria-label="Footer" className="flex flex-wrap justify-center gap-6 text-sm">
+          <Link href="/#what-we-do" className="hover:text-white">
             What We Do
-          </a>
-          <a href="#how-it-works" className="hover:text-white">
+          </Link>
+          <Link href="/#how-it-works" className="hover:text-white">
             How It Works
-          </a>
-          <a href="#packages" className="hover:text-white">
+          </Link>
+          <Link href="/products" className="hover:text-white">
+            Products
+          </Link>
+          <Link href="/#packages" className="hover:text-white">
             Packages
-          </a>
-          <a href="#contact" className="hover:text-white">
+          </Link>
+          <Link href="/#contact" className="hover:text-white">
             Contact
-          </a>
+          </Link>
         </nav>
       </div>
       <p className="mt-8 text-center text-xs text-slate-400">

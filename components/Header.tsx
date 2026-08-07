@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Logo } from "./Logo";
 
+// Homepage-section links are prefixed with "/" so they work correctly
+// from any route, not just when already on the homepage.
 const NAV_LINKS = [
-  { label: "What We Do", href: "#what-we-do" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Packages", href: "#packages" },
-  { label: "Contact", href: "#contact" },
+  { label: "What We Do", href: "/#what-we-do" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Products", href: "/products" },
+  { label: "Packages", href: "/#packages" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const FOCUSABLE_SELECTOR =
@@ -74,31 +78,31 @@ export default function Header() {
           scrolled ? "py-3" : "py-5"
         }`}
       >
-        <a href="#top" aria-label="NunyaLink Systems — back to top">
+        <Link href="/" aria-label="NunyaLink Systems — home">
           <Logo />
-        </a>
+        </Link>
 
         <nav
           className="hidden items-center gap-8 md:flex"
           aria-label="Primary"
         >
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-slate-600 transition-colors hover:text-navy"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="hidden rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-navy-dark md:inline-block"
         >
           Book a Free Automation Audit
-        </a>
+        </Link>
 
         <button
           ref={toggleButtonRef}
@@ -145,23 +149,23 @@ export default function Header() {
           <ul className="flex flex-col gap-1 pt-2">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className="block rounded-md px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
             <li className="pt-2">
-              <a
-                href="#contact"
+              <Link
+                href="/#contact"
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-md bg-navy px-3 py-3 text-center text-base font-semibold text-white hover:bg-navy-dark"
               >
                 Book a Free Automation Audit
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

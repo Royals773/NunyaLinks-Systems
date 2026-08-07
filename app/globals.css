@@ -17,6 +17,12 @@
   --color-accent: #2e6da4;
   --color-accent-dark: #235684;
   --color-accent-light: #eaf1f8;
+
+  /* Products sub-brand palette (teal) — scoped to /products */
+  --color-teal-deep: #0b2b32;
+  --color-teal: #0e7c86;
+  --color-teal-bright: #2bb3e0;
+  --color-teal-light: #e7f6f9;
 }
 
 html {
