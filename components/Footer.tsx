@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { Logo } from "./Logo";
+import CopyEmailButton from "./CopyEmailButton";
 import { ENQUIRIES_EMAIL, ENQUIRIES_MAILTO } from "@/lib/site";
 
 export default function Footer() {
@@ -17,13 +18,21 @@ export default function Footer() {
           <p className="mt-2 text-sm text-slate-400">
             Automate the busywork. Run the business.
           </p>
-          <a
-            href={ENQUIRIES_MAILTO}
-            className="mt-3 inline-flex items-center justify-center gap-1.5 text-sm text-slate-300 transition-colors hover:text-white sm:justify-start"
-          >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            {ENQUIRIES_EMAIL}
-          </a>
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm sm:justify-start">
+            <a
+              href={ENQUIRIES_MAILTO}
+              className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              {ENQUIRIES_EMAIL}
+            </a>
+            {/* Mailto silently no-ops without a default mail client — this
+                lets visitors copy the address instead. */}
+            <CopyEmailButton
+              email={ENQUIRIES_EMAIL}
+              className="text-slate-400 hover:text-white"
+            />
+          </div>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap justify-center gap-6 text-sm">
           <Link href="/#what-we-do" className="hover:text-white">

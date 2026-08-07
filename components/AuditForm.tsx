@@ -13,6 +13,7 @@ import {
 } from "@/lib/audit";
 import { ENQUIRIES_EMAIL, ENQUIRIES_MAILTO } from "@/lib/site";
 import Reveal from "./Reveal";
+import CopyEmailButton from "./CopyEmailButton";
 
 const INITIAL_FORM: AuditRequestPayload = {
   fullName: "",
@@ -142,13 +143,21 @@ export default function AuditForm() {
             Book a free automation audit and we&rsquo;ll find the one process
             worth fixing first — and show you what it&rsquo;s worth.
           </p>
-          <a
-            href={ENQUIRIES_MAILTO}
-            className="mt-4 inline-flex items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-navy"
-          >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            Prefer email? Reach us at {ENQUIRIES_EMAIL}
-          </a>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
+            <a
+              href={ENQUIRIES_MAILTO}
+              className="inline-flex items-center gap-1.5 text-slate-500 transition-colors hover:text-navy"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Prefer email? Reach us at {ENQUIRIES_EMAIL}
+            </a>
+            {/* Mailto silently no-ops without a default mail client — this
+                lets visitors copy the address instead. */}
+            <CopyEmailButton
+              email={ENQUIRIES_EMAIL}
+              className="text-slate-500 hover:text-navy"
+            />
+          </div>
         </Reveal>
 
         <Reveal>

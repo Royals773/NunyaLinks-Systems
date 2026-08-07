@@ -67,7 +67,7 @@ export default async function ProductDetailPage({
               {product.tagline}
             </p>
 
-            <ProductCtaButton cta={product.cta} className="mt-8" />
+            <ProductCtaButton cta={product.cta} className="mt-8" theme="dark" />
           </Reveal>
         </div>
       </section>
@@ -229,7 +229,7 @@ export default async function ProductDetailPage({
               </ul>
             )}
 
-            <ProductCtaButton cta={product.cta} className="mt-10" />
+            <ProductCtaButton cta={product.cta} className="mt-10" theme="dark" />
           </Reveal>
         </div>
       </section>
