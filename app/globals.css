@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f9fb;
+  --foreground: #16233a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+
+  /* Brand palette */
+  --color-navy: #1f3a5f;
+  --color-navy-dark: #142943;
+  --color-navy-light: #2a4b76;
+  --color-accent: #2e6da4;
+  --color-accent-dark: #235684;
+  --color-accent-light: #eaf1f8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+/* Anchor targets sit below the sticky header */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/*
+ * Consistent focus-visible ring in the brand blue for every interactive
+ * element. Two-tone (white + accent) so it stays visible at 3:1+ contrast
+ * regardless of whether it sits on a light section or the navy bands —
+ * a single accent-on-navy ring falls under 3:1 and would be invisible
+ * on the ROI band / footer.
+ */
+:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Every animation/transition on the site respects reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-init {
+  opacity: 0;
+}
+
+.animate-reveal {
+  animation: reveal 0.6s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init {
+    opacity: 1;
+  }
+  .animate-reveal {
+    animation: none;
+    opacity: 1;
+  }
+}
