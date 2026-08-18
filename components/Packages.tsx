@@ -80,7 +80,7 @@ export default function Packages() {
     <section
       id="packages"
       aria-labelledby="packages-heading"
-      className="bg-slate-50 py-20 sm:py-28"
+      className="bg-white py-20 sm:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">

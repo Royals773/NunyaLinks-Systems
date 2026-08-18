@@ -128,7 +128,7 @@ export default function AuditForm() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="bg-white py-20 sm:py-28"
+      className="bg-slate-50 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-10 text-center">

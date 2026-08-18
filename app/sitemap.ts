@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PRODUCTS } from "@/lib/products";
+import { WORK_ITEMS } from "@/lib/work";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
@@ -23,6 +24,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...PRODUCTS.map((product) => ({
       url: `${siteUrl}/products/${product.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    {
+      url: `${siteUrl}/work`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...WORK_ITEMS.map((item) => ({
+      url: `${siteUrl}/work/${item.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,

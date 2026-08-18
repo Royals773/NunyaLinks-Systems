@@ -32,11 +32,11 @@ export default function FounderSection() {
   return (
     <section
       aria-labelledby="founder-heading"
-      className="bg-white py-20 sm:py-28"
+      className="bg-slate-50 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <Reveal className="grid grid-cols-1 items-start gap-10 sm:grid-cols-[15rem_1fr] sm:gap-12">
-          <div className="mx-auto flex aspect-square w-40 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-slate-50 text-slate-400 sm:mx-0 sm:w-full">
+          <div className="mx-auto flex aspect-square w-40 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white text-slate-400 sm:mx-0 sm:w-full">
             <UserRound className="h-9 w-9" aria-hidden="true" />
             <p className="px-4 text-center text-xs leading-relaxed">
               Founder photo — to be added

@@ -5,6 +5,7 @@ import WhatWeDo from "@/components/WhatWeDo";
 import RoiSection from "@/components/RoiSection";
 import WhatWeBuild from "@/components/WhatWeBuild";
 import ExampleSystems from "@/components/ExampleSystems";
+import SelectedWork from "@/components/SelectedWork";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
 import FounderSection from "@/components/FounderSection";
 import WhyUs from "@/components/WhyUs";
@@ -25,6 +26,7 @@ export default function Home() {
       <RoiSection />
       <WhatWeBuild />
       <ExampleSystems />
+      <SelectedWork />
       <WhoWeWorkWith />
       <FounderSection />
       <WhyUs />
