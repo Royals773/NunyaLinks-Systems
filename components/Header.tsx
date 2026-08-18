@@ -101,7 +101,7 @@ export default function Header() {
           href="/#contact"
           className="hidden rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-navy-dark md:inline-block"
         >
-          Book a Free Automation Audit
+          Book a Free Opportunity Review
         </Link>
 
         <button
@@ -164,7 +164,7 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-md bg-navy px-3 py-3 text-center text-base font-semibold text-white hover:bg-navy-dark"
               >
-                Book a Free Automation Audit
+                Book a Free Opportunity Review
               </Link>
             </li>
           </ul>

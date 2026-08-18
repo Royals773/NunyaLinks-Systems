@@ -51,32 +51,32 @@ export default function WhatWeBuild() {
       aria-labelledby="what-we-build-heading"
       className="bg-slate-50 py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2
             id="what-we-build-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             What We Build
           </h2>
         </Reveal>
 
-        <ul className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mx-auto mt-14 grid grid-cols-1 gap-x-10 gap-y-9 lg:grid-cols-2">
           {BUILDS.map((item, i) => (
-            <Reveal key={item.title} delay={i * 60}>
-              <li className="flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-accent-light">
-                  <item.icon
-                    className="h-6 w-6 text-accent"
-                    aria-hidden="true"
-                  />
+            <Reveal key={item.title} delay={i * 50}>
+              <li className="flex items-start gap-4 border-t border-slate-200 pt-6">
+                <item.icon
+                  className="mt-0.5 h-6 w-6 shrink-0 text-accent"
+                  aria-hidden="true"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold text-navy">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-semibold text-navy">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                  {item.description}
-                </p>
               </li>
             </Reveal>
           ))}

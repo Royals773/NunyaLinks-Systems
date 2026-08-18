@@ -134,13 +134,14 @@ export default function AuditForm() {
         <Reveal className="mb-10 text-center">
           <h2
             id="contact-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             Tell us what&rsquo;s eating your week.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-slate-600">
-            Book a free automation audit and we&rsquo;ll find the one process
-            worth fixing first — and show you what it&rsquo;s worth.
+            Book a free Automation Opportunity Review and we&rsquo;ll find
+            the one process worth fixing first — and show you what
+            it&rsquo;s worth.
           </p>
           <a
             href={ENQUIRIES_MAILTO}
@@ -411,7 +412,7 @@ export default function AuditForm() {
                 )}
                 {status === "submitting"
                   ? "Sending your request…"
-                  : "Book My Free Automation Audit"}
+                  : "Book My Free Opportunity Review"}
               </button>
             </form>
           )}

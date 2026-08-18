@@ -18,11 +18,28 @@
   --color-accent-dark: #235684;
   --color-accent-light: #eaf1f8;
 
+  /* Warm tertiary — used only inside the before/after workflow diagram to
+     mark the "automated" state. Deliberately not used anywhere else, so it
+     reads as a signal rather than decoration. */
+  --color-signal: #bd6a35;
+  --color-signal-light: #f5e9df;
+
   /* Products sub-brand palette (teal) — scoped to /products */
   --color-teal-deep: #0b2b32;
   --color-teal: #0e7c86;
   --color-teal-bright: #2bb3e0;
   --color-teal-light: #e7f6f9;
+}
+
+/*
+ * Display face for section headings — Fraunces, loaded in app/layout.tsx.
+ * Kept as an explicit class (rather than relying on Tailwind's --font-*
+ * auto-utility inference) so it's easy to see everywhere it's applied.
+ * Body copy and UI elements stay on Inter (--font-sans).
+ */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
 }
 
 html {

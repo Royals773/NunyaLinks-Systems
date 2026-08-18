@@ -25,14 +25,14 @@ const PACKAGES: Package[] = [
     ],
   },
   {
-    title: "Automation Audit",
+    title: "Automation Audit & Roadmap",
     audience:
-      "For SMEs who want to know where they're losing time and what it's worth to fix.",
+      "For SMEs who want a documented roadmap of where they're losing time, what it's worth to fix, and the order to tackle it in.",
     includes: [
       "Full review of day-to-day operations",
       "Identification of highest-value automation opportunities",
       "A measured ROI estimate for each",
-      "A clear, no-obligation recommendation",
+      "A prioritised roadmap with a fixed build quote",
     ],
   },
   {
@@ -86,13 +86,13 @@ export default function Packages() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2
             id="packages-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             Packages
           </h2>
         </Reveal>
 
-        <ul className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <ul className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-5">
           {PACKAGES.map((pkg, i) => (
             <Reveal key={pkg.title} delay={i * 60} className="h-full">
               <li
@@ -114,7 +114,7 @@ export default function Packages() {
                   </span>
                 )}
                 <h3
-                  className={`text-lg font-bold leading-snug ${
+                  className={`font-display text-lg font-semibold leading-snug ${
                     pkg.highlighted ? "text-white" : "text-navy"
                   }`}
                 >
@@ -153,9 +153,9 @@ export default function Packages() {
 
         <Reveal className="mx-auto mt-14 max-w-2xl text-center">
           <p className="text-base leading-relaxed text-slate-600">
-            Every engagement starts with an audit. You&rsquo;ll get a
-            measured ROI estimate, a defined scope and a fixed build quote
-            before any work begins.
+            Every engagement starts with a free Automation Opportunity
+            Review. You&rsquo;ll get a measured ROI estimate, a defined
+            scope and a fixed build quote before any work begins.
           </p>
         </Reveal>
       </div>

@@ -70,7 +70,7 @@ function buildLeadEmailHtml(payload: AuditRequestPayload) {
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f7f9fb;padding:32px;">
     <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0;">
       <div style="background:#1F3A5F;padding:24px 32px;">
-        <h1 style="margin:0;color:#ffffff;font-size:20px;">New Automation Audit Request</h1>
+        <h1 style="margin:0;color:#ffffff;font-size:20px;">New Automation Opportunity Review Request</h1>
       </div>
       <div style="padding:24px 32px;">
         <div style="background:#eaf1f8;border-left:4px solid #2E6DA4;border-radius:4px;padding:16px 20px;margin-bottom:24px;">
@@ -115,7 +115,7 @@ function buildConfirmationEmailHtml(payload: AuditRequestPayload) {
         <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#16233a;">
           Thanks for telling us about ${escapeHtml(
             payload.businessName
-          )}&rsquo;s biggest time-drain. NunyaLink Systems will be in touch within one working day to book your free automation audit.
+          )}&rsquo;s biggest time-drain. NunyaLink Systems will be in touch within one working day to book your free Automation Opportunity Review.
         </p>
         <p style="margin:0;font-size:15px;line-height:1.6;color:#16233a;">
           — The NunyaLink Systems team

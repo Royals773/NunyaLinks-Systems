@@ -22,7 +22,7 @@ export default function WhoWeWorkWith() {
         <Reveal>
           <h2
             id="who-we-work-with-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             Who We Work With
           </h2>

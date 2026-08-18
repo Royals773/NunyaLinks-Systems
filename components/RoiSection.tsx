@@ -15,9 +15,10 @@ export default function RoiSection() {
           />
           <h2
             id="roi-heading"
-            className="text-3xl font-bold tracking-tight sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight sm:text-4xl"
           >
-            Every automation pays for itself — and we show you the numbers.
+            The right automation should pay for itself in time saved, errors
+            reduced or opportunities recovered.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-200">
             Before we build anything, we measure the process: how many hours

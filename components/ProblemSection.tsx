@@ -45,7 +45,7 @@ export default function ProblemSection() {
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2
             id="problem-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             Your team is spending hours on work a system could do for free.
           </h2>
@@ -54,12 +54,12 @@ export default function ProblemSection() {
           </p>
         </Reveal>
 
-        <ul className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mx-auto mt-12 max-w-3xl divide-y divide-slate-200 border-y border-slate-200">
           {PAIN_POINTS.map((point, i) => (
-            <Reveal key={point.text} delay={i * 60}>
-              <li className="flex h-full items-start gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <Reveal key={point.text} delay={i * 50}>
+              <li className="flex items-center gap-4 py-4">
                 <point.icon
-                  className="mt-0.5 h-6 w-6 shrink-0 text-accent"
+                  className="h-5 w-5 shrink-0 text-accent"
                   aria-hidden="true"
                 />
                 <span className="text-sm leading-relaxed text-slate-700 sm:text-base">

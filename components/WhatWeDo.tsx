@@ -1,13 +1,5 @@
-import { CheckCircle2 } from "lucide-react";
 import Reveal from "./Reveal";
-
-const CAPABILITIES = [
-  "Capture and route every enquiry instantly",
-  "Send payment and document reminders automatically",
-  "Onboard a new staff member or client hands-off",
-  "Keep records synced across systems",
-  "Send the reports and alerts that used to require chasing",
-];
+import BeforeAfterFlow from "./BeforeAfterFlow";
 
 export default function WhatWeDo() {
   return (
@@ -20,7 +12,7 @@ export default function WhatWeDo() {
         <Reveal>
           <h2
             id="what-we-do-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             We find the work that&rsquo;s costing you, and we automate it.
           </h2>
@@ -30,25 +22,17 @@ export default function WhatWeDo() {
             them to the tools you already use, and maintain them so they keep
             running as you grow.
           </p>
+        </Reveal>
 
-          <ul className="mt-8 space-y-4">
-            {CAPABILITIES.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <CheckCircle2
-                  className="mt-0.5 h-5 w-5 shrink-0 text-accent"
-                  aria-hidden="true"
-                />
-                <span className="text-base leading-relaxed text-slate-700">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
+        <Reveal delay={80}>
+          <BeforeAfterFlow />
+        </Reveal>
 
-          <p className="mt-8 text-lg leading-relaxed text-slate-600">
-            And when a business needs a professional front door — a
-            mobile-first website that captures enquiries and feeds them
-            straight into your automations — we build that too.
+        <Reveal delay={120}>
+          <p className="mt-14 text-lg leading-relaxed text-slate-600">
+            And sometimes the first thing to fix isn&rsquo;t a process behind
+            the scenes — it&rsquo;s the business&rsquo;s front door. We build
+            that too.
           </p>
         </Reveal>
       </div>

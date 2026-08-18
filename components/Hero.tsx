@@ -15,7 +15,7 @@ export default function Hero() {
           </p>
           <h1
             id="hero-heading"
-            className="text-4xl font-bold leading-tight tracking-tight text-navy sm:text-5xl lg:text-6xl"
+            className="font-display text-4xl font-semibold leading-tight tracking-tight text-navy sm:text-5xl lg:text-6xl"
           >
             Stop running your business on manual work.
           </h1>
@@ -32,7 +32,7 @@ export default function Hero() {
               href="#contact"
               className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-navy px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-navy-dark sm:w-auto"
             >
-              Book a Free Automation Audit
+              Book a Free Opportunity Review
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
@@ -44,8 +44,9 @@ export default function Hero() {
           </div>
 
           <p className="mt-6 text-sm text-slate-500">
-            Every engagement starts by finding one process that&rsquo;s
-            costing you hours — and showing you what it&rsquo;s worth to fix.
+            Every engagement starts with a free Automation Opportunity
+            Review — one process that&rsquo;s costing you hours, and what
+            it&rsquo;s worth to fix.
           </p>
         </Reveal>
       </div>

@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 
 const STEPS = [
   {
-    title: "Free automation audit",
+    title: "Free Automation Opportunity Review",
     description:
       "We find the process costing you the most time and money.",
   },
@@ -39,34 +39,40 @@ export default function HowItWorks() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2
             id="how-it-works-heading"
-            className="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             How It Works
           </h2>
         </Reveal>
 
-        <ol className="mx-auto mt-14 max-w-3xl space-y-8">
-          {STEPS.map((step, i) => (
-            <Reveal key={step.title} delay={i * 70}>
-              <li className="flex gap-5">
-                <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white"
-                  aria-hidden="true"
-                >
-                  {i + 1}
-                </div>
-                <div className="pt-1">
-                  <h3 className="text-lg font-semibold text-navy">
-                    {step.title}
-                  </h3>
-                  <p className="mt-1 text-base leading-relaxed text-slate-600">
-                    {step.description}
-                  </p>
-                </div>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+        <div className="relative mx-auto mt-14 max-w-3xl">
+          <div
+            aria-hidden="true"
+            className="absolute bottom-5 left-5 top-5 w-px bg-navy-light/30"
+          />
+          <ol className="space-y-8">
+            {STEPS.map((step, i) => (
+              <Reveal key={step.title} delay={i * 70}>
+                <li className="flex gap-5">
+                  <div
+                    className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white"
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="text-lg font-semibold text-navy">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1 text-base leading-relaxed text-slate-600">
+                      {step.description}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );
