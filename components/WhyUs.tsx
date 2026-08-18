@@ -1,4 +1,4 @@
-import { Target, Briefcase, ShieldCheck, KeyRound, Sprout } from "lucide-react";
+import { Target, ShieldCheck, KeyRound, Sprout } from "lucide-react";
 import Reveal from "./Reveal";
 
 const FEATURED = {
@@ -8,18 +8,7 @@ const FEATURED = {
     "We automate the processes that cost you the most, and we prove the return before we build.",
 };
 
-// "We come from running real operations" was written for a dedicated
-// FounderSection with a name and photo attached — that section is on hold
-// until real founder content exists (see components/FounderSection.tsx), so
-// this verified line lives here in the meantime rather than disappearing
-// from the page entirely.
 const SUPPORTING = [
-  {
-    icon: Briefcase,
-    title: "We come from running real operations, not just building tech",
-    description:
-      "Built by operators who run people-heavy, compliance-driven businesses ourselves. We know these workflows because we live them.",
-  },
   {
     icon: ShieldCheck,
     title: "We handle your data responsibly",
@@ -73,7 +62,7 @@ export default function WhyUs() {
           </div>
         </Reveal>
 
-        <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-3">
           {SUPPORTING.map((value, i) => (
             <Reveal key={value.title} delay={80 + i * 50}>
               <li className="border-t border-slate-200 pt-5">

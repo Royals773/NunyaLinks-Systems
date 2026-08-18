@@ -4,7 +4,9 @@ import ProblemSection from "@/components/ProblemSection";
 import WhatWeDo from "@/components/WhatWeDo";
 import RoiSection from "@/components/RoiSection";
 import WhatWeBuild from "@/components/WhatWeBuild";
+import ExampleSystems from "@/components/ExampleSystems";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
+import FounderSection from "@/components/FounderSection";
 import WhyUs from "@/components/WhyUs";
 import HowItWorks from "@/components/HowItWorks";
 import Packages from "@/components/Packages";
@@ -22,7 +24,9 @@ export default function Home() {
       <WhatWeDo />
       <RoiSection />
       <WhatWeBuild />
+      <ExampleSystems />
       <WhoWeWorkWith />
+      <FounderSection />
       <WhyUs />
       <HowItWorks />
       <Packages />
