@@ -8,18 +8,17 @@ const GOOGLESHEETS_TOOLKIT_VERSION = "20260813_00";
 const GMAIL_TOOLKIT_VERSION = "20260817_00";
 
 const SEARCH_TOOL = "GOOGLESHEETS_BATCH_GET";
-const APPEND_TOOL = "GOOGLESHEETS_SPREADSHEETS_VALUES_APPEND";
 const UPDATE_TOOL = "GOOGLESHEETS_VALUES_UPDATE";
 const CREATE_DRAFT_TOOL = "GMAIL_CREATE_EMAIL_DRAFT";
 
 const LEADS_SEARCH_RANGE = "Leads!A2:S1000";
-const LEADS_APPEND_RANGE = "Leads!A2:S1000";
+const SEARCH_RANGE_FIRST_ROW = 2;
+const SEARCH_RANGE_ROW_COUNT = 999; // rows 2..1000 inclusive
 
 // Column order within a Leads row (0-indexed, A:S).
 const COL = {
   leadId: 0,
   gmailDraftId: 17,
-  lastUpdated: 18,
 } as const;
 
 const PriorityEnum = z.enum(["High", "Medium", "Standard"]);
@@ -48,12 +47,83 @@ const PersistLeadInputSchema = z.object({
 
 type PersistLeadInput = z.infer<typeof PersistLeadInputSchema>;
 
+type SheetRow = (string | number)[];
+
 type PlanStage = {
-  stage: "search-existing-lead" | "append-row" | "create-gmail-draft" | "update-draft-id";
+  stage: "search-existing-lead" | "write-exact-row" | "create-gmail-draft" | "update-draft-id";
   tool: string;
   toolkitVersion: string;
   executed: boolean;
 };
+
+type LeadAction =
+  | { action: "skip-already-complete" }
+  | { action: "resume"; rowIndex: number }
+  | { action: "create"; emptyRowIndex: number }
+  | { action: "sheet-full" };
+
+// --- Pure helpers (no I/O — independently checkable) ---
+
+export function findFirstEmptyRowIndex(
+  existingRows: SheetRow[],
+  maxRows: number
+): number | null {
+  for (let i = 0; i < maxRows; i++) {
+    const leadIdCell = existingRows[i]?.[COL.leadId];
+    if (leadIdCell === undefined || leadIdCell === null || String(leadIdCell).trim() === "") {
+      return i;
+    }
+  }
+  return null;
+}
+
+export function determineLeadAction(
+  existingRows: SheetRow[],
+  leadId: string,
+  maxRows: number
+): LeadAction {
+  const existingIndex = existingRows.findIndex(
+    (row) => String(row[COL.leadId] ?? "") === leadId
+  );
+
+  if (existingIndex !== -1) {
+    const existingGmailDraftId = String(existingRows[existingIndex][COL.gmailDraftId] ?? "").trim();
+    if (existingGmailDraftId) {
+      return { action: "skip-already-complete" };
+    }
+    return { action: "resume", rowIndex: existingIndex };
+  }
+
+  const emptyRowIndex = findFirstEmptyRowIndex(existingRows, maxRows);
+  if (emptyRowIndex === null) {
+    return { action: "sheet-full" };
+  }
+  return { action: "create", emptyRowIndex };
+}
+
+// Shared Composio-result assertion/decoder. Applied immediately after every
+// tool execution. Never treats an HTTP 200 wrapper as tool success — checks
+// `successful` explicitly before trusting `data`. Thrown errors carry only
+// the operation name and a safe category, never arguments, response bodies,
+// spreadsheet ID, email, draft ID, generated text, credentials, or account
+// IDs.
+export function decodeToolResult(
+  operationName: string,
+  result: unknown
+): Record<string, unknown> {
+  if (!result || typeof result !== "object") {
+    throw new Error(`Composio operation "${operationName}" returned an unrecognised response shape.`);
+  }
+  const r = result as { successful?: unknown; data?: unknown; error?: unknown };
+
+  if (r.successful !== true) {
+    throw new Error(`Composio operation "${operationName}" did not succeed (successful=false).`);
+  }
+  if (!r.data || typeof r.data !== "object") {
+    throw new Error(`Composio operation "${operationName}" succeeded but returned no usable data.`);
+  }
+  return r.data as Record<string, unknown>;
+}
 
 function calculateFollowUpDue(submittedAt: string, followUpDelayHours: number): string {
   const submittedMs = new Date(submittedAt).getTime();
@@ -68,7 +138,7 @@ function buildLeadsRow(
   followUpDueIso: string,
   lastUpdatedIso: string,
   gmailDraftId = ""
-): (string | number)[] {
+): SheetRow {
   const questionsText = input.suggestedQuestions
     .map((question, i) => `${i + 1}. ${question}`)
     .join("\n");
@@ -113,8 +183,8 @@ function planStages(): PlanStage[] {
       executed: false,
     },
     {
-      stage: "append-row",
-      tool: APPEND_TOOL,
+      stage: "write-exact-row",
+      tool: UPDATE_TOOL,
       toolkitVersion: GOOGLESHEETS_TOOLKIT_VERSION,
       executed: false,
     },
@@ -136,6 +206,15 @@ function planStages(): PlanStage[] {
 export const persistOpportunityReviewTask = task({
   id: "persist-opportunity-review",
   maxDuration: 60,
+  // Task-level retry protection — overrides the project's 3-attempt default.
+  retry: {
+    maxAttempts: 1,
+  },
+  // Only one persistence run at a time, so two runs can never select the
+  // same empty row concurrently.
+  queue: {
+    concurrencyLimit: 1,
+  },
   run: async (rawInput: unknown) => {
     const input = PersistLeadInputSchema.parse(rawInput);
 
@@ -192,48 +271,54 @@ export const persistOpportunityReviewTask = task({
       }
     }
 
+    async function createDraftAndUpdateRow(sheetRow: number) {
+      const draftResult = await execute(CREATE_DRAFT_TOOL, GMAIL_TOOLKIT_VERSION, {
+        recipient_email: input.email,
+        subject: input.draftEmailSubject,
+        body: input.draftEmailBody,
+      });
+      const draftData = decodeToolResult("create-gmail-draft", draftResult);
+      const draftId = typeof draftData.id === "string" ? draftData.id : undefined;
+      if (!draftId) {
+        throw new Error("Composio operation \"create-gmail-draft\" did not return a draft id.");
+      }
+
+      const updateResult = await execute(UPDATE_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
+        spreadsheet_id: spreadsheetId,
+        range: `Leads!R${sheetRow}:S${sheetRow}`,
+        values: [[draftId, new Date().toISOString()]],
+      });
+      decodeToolResult("update-draft-id", updateResult);
+    }
+
     // 1. Search a bounded range for an existing lead by Lead ID.
     const searchResult = await execute(SEARCH_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
       spreadsheet_id: spreadsheetId,
       ranges: [LEADS_SEARCH_RANGE],
     });
+    const searchData = decodeToolResult("search-existing-lead", searchResult);
     const existingRows =
-      (searchResult.data as { valueRanges?: { values?: (string | number)[][] }[] } | undefined)
-        ?.valueRanges?.[0]?.values ?? [];
-    const existingIndex = existingRows.findIndex(
-      (row) => String(row[COL.leadId] ?? "") === input.leadId
-    );
+      (searchData.valueRanges as { values?: SheetRow[] }[] | undefined)?.[0]?.values ?? [];
 
-    if (existingIndex !== -1) {
-      const existingGmailDraftId = String(existingRows[existingIndex][COL.gmailDraftId] ?? "").trim();
-      if (existingGmailDraftId) {
-        logger.log(
-          `dryRun: false, priority: ${input.priority}, status: skipped-already-complete, toolExecutions: ${toolExecutionCount}`
-        );
-        return {
-          dryRun: false,
-          priority: input.priority,
-          status: "skipped-already-complete" as const,
-          toolExecutionCount,
-        };
-      }
+    const decision = determineLeadAction(existingRows, input.leadId, SEARCH_RANGE_ROW_COUNT);
+
+    if (decision.action === "skip-already-complete") {
+      logger.log(
+        `dryRun: false, priority: ${input.priority}, status: skipped-already-complete, toolExecutions: ${toolExecutionCount}`
+      );
+      return {
+        dryRun: false,
+        priority: input.priority,
+        status: "skipped-already-complete" as const,
+        toolExecutionCount,
+      };
+    }
+
+    if (decision.action === "resume") {
       // Existing lead with a blank Gmail Draft ID — resume rather than
-      // append a duplicate row. Sheet row number = search-range offset + 2
-      // (LEADS_SEARCH_RANGE starts at row 2).
-      const sheetRow = existingIndex + 2;
-      const draft = await execute(CREATE_DRAFT_TOOL, GMAIL_TOOLKIT_VERSION, {
-        recipient_email: input.email,
-        subject: input.draftEmailSubject,
-        body: input.draftEmailBody,
-      });
-      const draftId = (draft.data as { id?: string } | undefined)?.id;
-      if (!draftId) throw new Error("Gmail draft creation did not return a draft id.");
-
-      await execute(UPDATE_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
-        spreadsheet_id: spreadsheetId,
-        range: `Leads!R${sheetRow}:S${sheetRow}`,
-        values: [[draftId, new Date().toISOString()]],
-      });
+      // write a duplicate row.
+      const sheetRow = decision.rowIndex + SEARCH_RANGE_FIRST_ROW;
+      await createDraftAndUpdateRow(sheetRow);
 
       logger.log(
         `dryRun: false, priority: ${input.priority}, status: resumed, toolExecutions: ${toolExecutionCount}`
@@ -246,35 +331,24 @@ export const persistOpportunityReviewTask = task({
       };
     }
 
-    // 2. Absent lead — append once, then create the Gmail draft, then
-    // update the row's Gmail Draft ID and Last Updated columns.
-    const appendResult = await execute(APPEND_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
-      range: LEADS_APPEND_RANGE,
-      spreadsheetId,
-      values: [plannedRow],
-    });
-    const updatedRange = (
-      appendResult.data as { updates?: { updatedRange?: string } } | undefined
-    )?.updates?.updatedRange;
-    const rowMatch = updatedRange?.match(/![A-Z]+(\d+):/);
-    const appendedRow = rowMatch ? Number(rowMatch[1]) : undefined;
-    if (!appendedRow) {
-      throw new Error("Append did not return a resolvable row number.");
+    if (decision.action === "sheet-full") {
+      throw new Error(
+        "No available row found in the bounded Leads range. The sheet may be full."
+      );
     }
 
-    const draft = await execute(CREATE_DRAFT_TOOL, GMAIL_TOOLKIT_VERSION, {
-      recipient_email: input.email,
-      subject: input.draftEmailSubject,
-      body: input.draftEmailBody,
-    });
-    const draftId = (draft.data as { id?: string } | undefined)?.id;
-    if (!draftId) throw new Error("Gmail draft creation did not return a draft id.");
-
-    await execute(UPDATE_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
+    // 2. Absent lead — write the row at the first genuinely empty row
+    // within the same bounded range, then create the Gmail draft, then
+    // update that exact row's Gmail Draft ID and Last Updated columns.
+    const sheetRow = decision.emptyRowIndex + SEARCH_RANGE_FIRST_ROW;
+    const writeResult = await execute(UPDATE_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
       spreadsheet_id: spreadsheetId,
-      range: `Leads!R${appendedRow}:S${appendedRow}`,
-      values: [[draftId, new Date().toISOString()]],
+      range: `Leads!A${sheetRow}:S${sheetRow}`,
+      values: [plannedRow],
     });
+    decodeToolResult("write-exact-row", writeResult);
+
+    await createDraftAndUpdateRow(sheetRow);
 
     logger.log(
       `dryRun: false, priority: ${input.priority}, status: created, toolExecutions: ${toolExecutionCount}`
