@@ -286,6 +286,7 @@ export const persistOpportunityReviewTask = task({
       const updateResult = await execute(UPDATE_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
         spreadsheet_id: spreadsheetId,
         range: `Leads!R${sheetRow}:S${sheetRow}`,
+        value_input_option: "RAW",
         values: [[draftId, new Date().toISOString()]],
       });
       decodeToolResult("update-draft-id", updateResult);
@@ -344,6 +345,7 @@ export const persistOpportunityReviewTask = task({
     const writeResult = await execute(UPDATE_TOOL, GOOGLESHEETS_TOOLKIT_VERSION, {
       spreadsheet_id: spreadsheetId,
       range: `Leads!A${sheetRow}:S${sheetRow}`,
+      value_input_option: "RAW",
       values: [plannedRow],
     });
     decodeToolResult("write-exact-row", writeResult);
