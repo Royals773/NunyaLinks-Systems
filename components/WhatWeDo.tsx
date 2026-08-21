@@ -12,7 +12,7 @@ export default function WhatWeDo() {
         <Reveal>
           <h2
             id="what-we-do-heading"
-            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
+            className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
           >
             We find the work that&rsquo;s costing you, and we automate it.
           </h2>
@@ -20,7 +20,7 @@ export default function WhatWeDo() {
             We don&rsquo;t sell software you have to learn. We build
             automations tailored to how your business already works, connect
             them to the tools you already use, and maintain them so they keep
-            running as you grow.
+            running as you grow. Here&rsquo;s exactly what that changes:
           </p>
         </Reveal>
 

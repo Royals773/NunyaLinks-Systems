@@ -15,13 +15,13 @@ export default function Icon() {
         viewBox="0 0 32 32"
         style={{ display: "flex" }}
       >
-        <rect width="32" height="32" rx="7" fill="#1F3A5F" />
+        <rect width="32" height="32" rx="7" fill="#12192B" />
         <line
           x1="11.5"
           y1="11.5"
           x2="20.5"
           y2="20.5"
-          stroke="#2E6DA4"
+          stroke="#A6431F"
           strokeWidth="4"
           strokeLinecap="round"
         />

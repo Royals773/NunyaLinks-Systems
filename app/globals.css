@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f9fb;
-  --foreground: #16233a;
+  /* Warm paper, not cool grey — the "warm, light neutral" the brand runs on. */
+  --background: #f7f4ee;
+  --foreground: #12192b;
 }
 
 @theme inline {
@@ -10,19 +11,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
 
-  /* Brand palette */
+  /* Brand palette — one dominant ink, one warm accent, disciplined use of both. */
+  --color-ink: #12192b;
   --color-navy: #1f3a5f;
-  --color-navy-dark: #142943;
+  --color-navy-dark: #12192b;
   --color-navy-light: #2a4b76;
-  --color-accent: #2e6da4;
-  --color-accent-dark: #235684;
-  --color-accent-light: #eaf1f8;
 
-  /* Warm tertiary — used only inside the before/after workflow diagram to
-     mark the "automated" state. Deliberately not used anywhere else, so it
-     reads as a signal rather than decoration. */
-  --color-signal: #bd6a35;
-  --color-signal-light: #f5e9df;
+  /* Terracotta accent — the one distinctive colour in the system. Deliberately
+     not blue/purple: it reads as operational and confident rather than
+     "AI startup". accent-dark is for text on light warm tints; accent-light
+     is for text/icons on dark ink or navy surfaces, and for pale tint fills. */
+  --color-accent: #a6431f;
+  --color-accent-dark: #7a2f13;
+  --color-accent-light: #f4e1cc;
 
   /* Products sub-brand palette (teal) — scoped to /products */
   --color-teal-deep: #0b2b32;

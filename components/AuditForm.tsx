@@ -136,16 +136,16 @@ export default function AuditForm() {
             id="contact-heading"
             className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
-            Tell us what&rsquo;s eating your week.
+            Book your free Automation Opportunity Review
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-slate-600">
-            Book a free Automation Opportunity Review and we&rsquo;ll find
-            the one process worth fixing first — and show you what
-            it&rsquo;s worth.
+            Tell us what&rsquo;s eating your week and we&rsquo;ll identify
+            the one process worth investigating first — no cost, no
+            obligation.
           </p>
           <a
             href={ENQUIRIES_MAILTO}
-            className="mt-4 inline-flex flex-wrap items-center justify-center gap-1.5 rounded-full bg-accent-light px-4 py-2 text-center text-sm font-medium text-accent-dark transition-colors hover:bg-accent-light/70"
+            className="mt-4 inline-flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-dark"
           >
             <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
             Prefer email? Reach us at {ENQUIRIES_EMAIL}
@@ -164,7 +164,8 @@ export default function AuditForm() {
               />
               <p className="mt-4 text-lg font-semibold text-navy">
                 Thanks — we&rsquo;ve got it. We&rsquo;ll be in touch within
-                one working day to book your audit.
+                one working day to book your free Automation Opportunity
+                Review.
               </p>
             </div>
           ) : (
@@ -405,7 +406,7 @@ export default function AuditForm() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-navy px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-70"
+                className="flex w-full items-center justify-center gap-2 rounded-md bg-ink px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-navy disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {status === "submitting" && (
                   <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />

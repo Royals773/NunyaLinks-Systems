@@ -16,7 +16,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#1F3A5F",
+          background: "#12192B",
           fontFamily: "Arial, sans-serif",
         }}
       >
@@ -35,7 +35,7 @@ export default function OpengraphImage() {
               y1="11.5"
               x2="20.5"
               y2="20.5"
-              stroke="#2E6DA4"
+              stroke="#A6431F"
               strokeWidth="4"
               strokeLinecap="round"
             />
@@ -44,7 +44,7 @@ export default function OpengraphImage() {
           </svg>
           <div style={{ display: "flex", fontSize: 64, fontWeight: 700 }}>
             <div style={{ display: "flex", color: "#ffffff" }}>NunyaLink</div>
-            <div style={{ display: "flex", color: "#2E6DA4", marginLeft: 18 }}>
+            <div style={{ display: "flex", color: "#A6431F", marginLeft: 18 }}>
               Systems
             </div>
           </div>
@@ -54,7 +54,7 @@ export default function OpengraphImage() {
             display: "flex",
             marginTop: 32,
             fontSize: 32,
-            color: "#eaf1f8",
+            color: "#F4E1CC",
           }}
         >
           Automate the busywork. Run the business.

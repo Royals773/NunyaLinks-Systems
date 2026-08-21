@@ -4,12 +4,12 @@ const STEPS = [
   {
     title: "Free Automation Opportunity Review",
     description:
-      "We find the process costing you the most time and money.",
+      "A focused conversation to identify the process costing you the most time and money.",
   },
   {
-    title: "The ROI case",
+    title: "Automation Audit & Roadmap",
     description:
-      "We measure the hours and cost and show you what fixing it is worth.",
+      "A paid, in-depth review of that process — ROI estimate, priorities and a fixed build quote.",
   },
   {
     title: "Build",
@@ -48,14 +48,14 @@ export default function HowItWorks() {
         <div className="relative mx-auto mt-14 max-w-3xl">
           <div
             aria-hidden="true"
-            className="absolute bottom-5 left-5 top-5 w-px bg-navy-light/30"
+            className="absolute bottom-5 left-5 top-5 w-px bg-ink/10"
           />
           <ol className="space-y-8">
             {STEPS.map((step, i) => (
               <Reveal key={step.title} delay={i * 70}>
                 <li className="flex gap-5">
                   <div
-                    className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white"
+                    className="font-display relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-base font-semibold text-accent shadow-[0_0_0_1px_rgba(18,25,43,0.1)]"
                     aria-hidden="true"
                   >
                     {i + 1}

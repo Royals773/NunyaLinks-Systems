@@ -255,7 +255,7 @@ export default async function WorkDetailPage({
             </h2>
             <p className="mt-4 text-base leading-relaxed text-slate-200">
               A free Automation Opportunity Review looks at your actual
-              process and tells you what&rsquo;s worth building first.
+              process and identifies what&rsquo;s worth investigating first.
             </p>
             <Link
               href="/#contact"

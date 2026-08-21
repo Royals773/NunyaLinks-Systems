@@ -97,7 +97,7 @@ export default function ExampleSystems() {
           <p className="mt-4 text-lg text-slate-600">
             A few examples of the kind of system NunyaLink could build.
           </p>
-          <p className="mt-2 inline-block rounded-full bg-accent-light px-4 py-1.5 text-sm font-medium text-accent-dark">
+          <p className="mt-2 text-sm font-medium italic text-slate-500">
             Illustrative examples — not a list of completed client projects
           </p>
         </Reveal>
@@ -156,7 +156,8 @@ export default function ExampleSystems() {
           <p className="text-sm text-slate-500">
             Every business is different — these show the shape of what&rsquo;s
             possible. A free Automation Opportunity Review looks at your
-            actual processes and tells you what&rsquo;s worth building first.
+            actual processes and identifies what&rsquo;s worth investigating
+            first.
           </p>
         </Reveal>
       </div>

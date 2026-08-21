@@ -16,7 +16,7 @@ export function LogoMark(props: SVGProps<SVGSVGElement>) {
       className="shrink-0"
       {...props}
     >
-      <rect width="32" height="32" rx="7" className="fill-navy" />
+      <rect width="32" height="32" rx="7" className="fill-ink" />
       <line
         x1="11.5"
         y1="11.5"
@@ -37,22 +37,34 @@ interface LogoProps {
   className?: string;
   /** Size override for the mark, e.g. "h-10 w-10". */
   markClassName?: string;
-  /** Colour override for the "NunyaLink" word — defaults to navy for light backgrounds. */
-  primaryTextClassName?: string;
+  /** "dark" (default) for light backgrounds like the header; "light" for
+   *  dark surfaces like the footer. Controls both words together so the
+   *  "Systems" qualifier always keeps accessible contrast against its
+   *  background — text-accent reads fine on white but fails on ink. */
+  variant?: "dark" | "light";
 }
 
-/** Full lockup: mark + wordmark. Use on any background — see primaryTextClassName. */
+/** Full lockup: mark + wordmark, "Systems" set as a small tracked qualifier
+ *  rather than a co-equal word, so the pairing reads as one deliberate
+ *  mark rather than two arbitrarily coloured words. */
 export function Logo({
   className = "",
   markClassName = "h-8 w-8",
-  primaryTextClassName = "text-navy",
+  variant = "dark",
 }: LogoProps) {
+  const nameColor = variant === "light" ? "text-white" : "text-ink";
+  const systemsColor = variant === "light" ? "text-accent-light" : "text-accent-dark";
+
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+    <span className={`inline-flex items-center gap-2 ${className}`}>
       <LogoMark className={markClassName} />
-      <span className="text-lg font-bold tracking-tight sm:text-xl">
-        <span className={primaryTextClassName}>NunyaLink</span>{" "}
-        <span className="text-accent">Systems</span>
+      <span className={`text-lg font-bold tracking-tight sm:text-xl ${nameColor}`}>
+        NunyaLink
+        <span
+          className={`ml-1.5 align-middle text-[0.6em] font-semibold uppercase tracking-[0.15em] ${systemsColor}`}
+        >
+          Systems
+        </span>
       </span>
     </span>
   );

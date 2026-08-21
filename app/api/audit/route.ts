@@ -61,24 +61,24 @@ function buildLeadEmailHtml(payload: AuditRequestPayload) {
       <td style="padding:8px 12px;font-weight:600;color:#1F3A5F;vertical-align:top;width:200px;">${escapeHtml(
         label
       )}</td>
-      <td style="padding:8px 12px;color:#16233a;">${escapeHtml(
+      <td style="padding:8px 12px;color:#12192b;">${escapeHtml(
         value || "—"
       )}</td>
     </tr>`;
 
   return `
-  <div style="font-family:Arial,Helvetica,sans-serif;background:#f7f9fb;padding:32px;">
+  <div style="font-family:Arial,Helvetica,sans-serif;background:#F7F4EE;padding:32px;">
     <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0;">
       <div style="background:#1F3A5F;padding:24px 32px;">
         <h1 style="margin:0;color:#ffffff;font-size:20px;">New Automation Opportunity Review Request</h1>
       </div>
       <div style="padding:24px 32px;">
-        <div style="background:#eaf1f8;border-left:4px solid #2E6DA4;border-radius:4px;padding:16px 20px;margin-bottom:24px;">
-          <p style="margin:0 0 6px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#2E6DA4;">Time-wasting process</p>
-          <p style="margin:0 0 12px;font-size:16px;color:#16233a;">${escapeHtml(
+        <div style="background:#F4E1CC;border-left:4px solid #A6431F;border-radius:4px;padding:16px 20px;margin-bottom:24px;">
+          <p style="margin:0 0 6px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#A6431F;">Time-wasting process</p>
+          <p style="margin:0 0 12px;font-size:16px;color:#12192b;">${escapeHtml(
             payload.process
           )}</p>
-          <p style="margin:0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#2E6DA4;">Hours per week</p>
+          <p style="margin:0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#A6431F;">Hours per week</p>
           <p style="margin:0;font-size:16px;font-weight:700;color:#1F3A5F;">${escapeHtml(
             payload.hoursPerWeek || "Not sure"
           )}</p>
@@ -103,21 +103,21 @@ function buildLeadEmailHtml(payload: AuditRequestPayload) {
 
 function buildConfirmationEmailHtml(payload: AuditRequestPayload) {
   return `
-  <div style="font-family:Arial,Helvetica,sans-serif;background:#f7f9fb;padding:32px;">
+  <div style="font-family:Arial,Helvetica,sans-serif;background:#F7F4EE;padding:32px;">
     <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0;">
       <div style="background:#1F3A5F;padding:24px 32px;">
-        <h1 style="margin:0;color:#ffffff;font-size:20px;">We&rsquo;ve got your audit request</h1>
+        <h1 style="margin:0;color:#ffffff;font-size:20px;">We&rsquo;ve got your review request</h1>
       </div>
       <div style="padding:24px 32px;">
-        <p style="margin:0 0 16px;font-size:15px;color:#16233a;">Hi ${escapeHtml(
+        <p style="margin:0 0 16px;font-size:15px;color:#12192b;">Hi ${escapeHtml(
           payload.fullName
         )},</p>
-        <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#16233a;">
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#12192b;">
           Thanks for telling us about ${escapeHtml(
             payload.businessName
           )}&rsquo;s biggest time-drain. NunyaLink Systems will be in touch within one working day to book your free Automation Opportunity Review.
         </p>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:#16233a;">
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#12192b;">
           — The NunyaLink Systems team
         </p>
       </div>
@@ -171,7 +171,7 @@ export async function POST(request: Request) {
       from: process.env.AUDIT_FROM_EMAIL as string,
       to: process.env.AUDIT_TO_EMAIL as string,
       replyTo: data.email,
-      subject: `New audit request — ${data.businessName}`,
+      subject: `New Automation Opportunity Review request — ${data.businessName}`,
       html: buildLeadEmailHtml(data),
     });
   } catch (error) {
@@ -190,7 +190,7 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: process.env.AUDIT_FROM_EMAIL as string,
       to: data.email,
-      subject: "We've got your audit request",
+      subject: "We've got your review request",
       html: buildConfirmationEmailHtml(data),
     });
   } catch (error) {

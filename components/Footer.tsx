@@ -8,17 +8,18 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy-dark py-10 text-slate-300">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 text-center sm:flex-row sm:justify-between sm:px-6 sm:text-left lg:px-8">
+    <footer className="bg-ink py-12 text-slate-300">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left lg:px-8">
         <div>
           <Logo
             className="justify-center sm:justify-start"
-            primaryTextClassName="text-white"
+            variant="light"
           />
-          <p className="mt-2 text-sm text-slate-400">
-            Automate the busywork. Run the business.
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
+            Automate the busywork. Run the business. NunyaLink builds and
+            maintains automation systems around how SMEs already operate.
           </p>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm sm:justify-start">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm sm:justify-start">
             <a
               href={ENQUIRIES_MAILTO}
               className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
@@ -34,25 +35,34 @@ export default function Footer() {
             />
           </div>
         </div>
-        <nav aria-label="Footer" className="flex flex-wrap justify-center gap-6 text-sm">
+        <nav
+          aria-label="Footer"
+          className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm"
+        >
           <Link href="/#what-we-do" className="hover:text-white">
             What We Do
           </Link>
           <Link href="/#how-it-works" className="hover:text-white">
             How It Works
           </Link>
-          <Link href="/products" className="hover:text-white">
-            Products
-          </Link>
           <Link href="/#packages" className="hover:text-white">
             Packages
+          </Link>
+          <Link href="/#why-nunyalink" className="hover:text-white">
+            Why NunyaLink
+          </Link>
+          <Link href="/work" className="hover:text-white">
+            Selected Work
+          </Link>
+          <Link href="/products" className="hover:text-white">
+            Products
           </Link>
           <Link href="/#contact" className="hover:text-white">
             Contact
           </Link>
         </nav>
       </div>
-      <p className="mt-8 text-center text-xs text-slate-400">
+      <p className="mt-10 text-center text-xs text-slate-500">
         &copy; {year} NunyaLink Systems. All rights reserved.
       </p>
     </footer>

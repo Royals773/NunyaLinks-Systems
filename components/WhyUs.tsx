@@ -32,6 +32,7 @@ const SUPPORTING = [
 export default function WhyUs() {
   return (
     <section
+      id="why-nunyalink"
       aria-labelledby="why-us-heading"
       className="bg-white py-20 sm:py-28"
     >
@@ -46,19 +47,17 @@ export default function WhyUs() {
         </Reveal>
 
         <Reveal delay={40}>
-          <div className="mx-auto mt-12 flex max-w-3xl flex-col items-start gap-4 rounded-lg border border-slate-200 bg-white p-7 shadow-sm sm:flex-row sm:items-center sm:gap-6">
+          <div className="mx-auto mt-12 max-w-3xl border-l-4 border-accent pl-6 sm:pl-8">
             <FEATURED.icon
-              className="h-9 w-9 shrink-0 text-accent"
+              className="h-8 w-8 text-accent"
               aria-hidden="true"
             />
-            <div>
-              <h3 className="font-display text-xl font-semibold text-navy">
-                {FEATURED.title}
-              </h3>
-              <p className="mt-1.5 text-base leading-relaxed text-slate-600">
-                {FEATURED.description}
-              </p>
-            </div>
+            <p className="font-display mt-3 text-2xl font-semibold leading-snug text-navy sm:text-3xl">
+              {FEATURED.title}
+            </p>
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-slate-600">
+              {FEATURED.description}
+            </p>
           </div>
         </Reveal>
 

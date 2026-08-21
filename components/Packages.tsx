@@ -1,6 +1,27 @@
 import { Check } from "lucide-react";
 import Reveal from "./Reveal";
 
+interface StartHereStep {
+  title: string;
+  tag: "Free" | "Paid";
+  description: string;
+}
+
+const START_HERE: StartHereStep[] = [
+  {
+    title: "Free Automation Opportunity Review",
+    tag: "Free",
+    description:
+      "A focused initial conversation to identify the manual process creating the greatest operational cost or friction. This is exploratory and does not include a complete operational audit or detailed implementation roadmap.",
+  },
+  {
+    title: "Automation Audit & Roadmap",
+    tag: "Paid",
+    description:
+      "A paid, in-depth review of the selected workflow, including process analysis, automation opportunities, estimated ROI, priorities and a recommended implementation roadmap.",
+  },
+];
+
 interface Package {
   title: string;
   badge?: "Entry point" | "Recommended";
@@ -9,9 +30,9 @@ interface Package {
   highlighted?: boolean;
 }
 
-const PACKAGES: Package[] = [
+const EXPAND_PACKAGES: Package[] = [
   {
-    title: "Digital Foundation (Website)",
+    title: "Digital Foundation",
     badge: "Entry point",
     audience:
       "For SMEs who need a professional online presence and a proper way to capture enquiries — often the first step before automating what happens next.",
@@ -22,17 +43,6 @@ const PACKAGES: Package[] = [
       "Basic customer records",
       "Analytics setup",
       "Team handover",
-    ],
-  },
-  {
-    title: "Automation Audit & Roadmap",
-    audience:
-      "For SMEs who want a documented roadmap of where they're losing time, what it's worth to fix, and the order to tackle it in.",
-    includes: [
-      "Full review of day-to-day operations",
-      "Identification of highest-value automation opportunities",
-      "A measured ROI estimate for each",
-      "A prioritised roadmap with a fixed build quote",
     ],
   },
   {
@@ -48,7 +58,7 @@ const PACKAGES: Package[] = [
     ],
   },
   {
-    title: "Automation Partner (Retainer)",
+    title: "Automation Partner",
     badge: "Recommended",
     highlighted: true,
     audience:
@@ -82,80 +92,143 @@ export default function Packages() {
       aria-labelledby="packages-heading"
       className="bg-white py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <Reveal className="max-w-2xl">
           <h2
             id="packages-heading"
             className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
           >
             Packages
           </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            Every engagement starts with a free review. From there, build
+            and expand at your own pace.
+          </p>
         </Reveal>
 
-        <ul className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-5">
-          {PACKAGES.map((pkg, i) => (
-            <Reveal key={pkg.title} delay={i * 60} className="h-full">
-              <li
-                className={`flex h-full flex-col rounded-lg border p-6 shadow-sm ${
-                  pkg.highlighted
-                    ? "border-2 border-navy bg-navy text-white shadow-md lg:-translate-y-2"
-                    : "border-slate-200 bg-white"
-                }`}
-              >
-                {pkg.badge && (
+        {/* Start here: the free review and the paid audit that follows it */}
+        <Reveal className="mt-14">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+            Start here
+          </p>
+        </Reveal>
+
+        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {START_HERE.map((step, i) => (
+            <Reveal key={step.title} delay={i * 60} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-ink/10 bg-slate-50 p-6 sm:p-8">
+                <div className="flex items-center gap-3">
                   <span
-                    className={`mb-3 inline-block w-fit rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
-                      pkg.highlighted
-                        ? "bg-accent text-white"
-                        : "bg-accent-light text-accent-dark"
+                    className="font-display flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white"
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
+                      step.tag === "Free"
+                        ? "bg-accent-light text-accent-dark"
+                        : "bg-navy text-white"
                     }`}
                   >
-                    {pkg.badge}
+                    {step.tag}
                   </span>
-                )}
-                <h3
-                  className={`font-display text-lg font-semibold leading-snug ${
-                    pkg.highlighted ? "text-white" : "text-navy"
-                  }`}
-                >
-                  {pkg.title}
+                </div>
+                <h3 className="font-display mt-4 text-xl font-semibold leading-snug text-navy">
+                  {step.title}
                 </h3>
-                <p
-                  className={`mt-2 text-sm leading-relaxed ${
-                    pkg.highlighted ? "text-slate-200" : "text-slate-600"
-                  }`}
-                >
-                  {pkg.audience}
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
+                  {step.description}
                 </p>
-                <ul className="mt-5 flex-1 space-y-2.5">
-                  {pkg.includes.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <Check
-                        className={`mt-0.5 h-4 w-4 shrink-0 ${
-                          pkg.highlighted ? "text-accent-light" : "text-accent"
-                        }`}
-                        aria-hidden="true"
-                      />
-                      <span
-                        className={`text-sm leading-relaxed ${
-                          pkg.highlighted ? "text-slate-100" : "text-slate-700"
-                        }`}
-                      >
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </li>
+              </div>
             </Reveal>
           ))}
+        </div>
+
+        {/* Ways to build and expand: the ongoing packages beyond the audit */}
+        <Reveal className="mt-20">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+            Ways to build and expand
+          </p>
+        </Reveal>
+
+        <ul className="mt-6 border-t border-ink/10">
+          {EXPAND_PACKAGES.map((pkg, i) =>
+            pkg.highlighted ? (
+              <Reveal key={pkg.title} delay={i * 40} className="border-b border-ink/10 py-4">
+                <li className="rounded-2xl bg-ink px-6 py-8 text-white sm:px-10 sm:py-10">
+                  <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-12">
+                    <div>
+                      <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+                        {pkg.badge}
+                      </span>
+                      <h3 className="font-display mt-4 text-2xl font-semibold leading-snug text-white">
+                        {pkg.title}
+                      </h3>
+                      <p className="mt-3 max-w-sm text-base leading-relaxed text-slate-300">
+                        {pkg.audience}
+                      </p>
+                    </div>
+                    <ul className="grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                      {pkg.includes.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5">
+                          <Check
+                            className="mt-0.5 h-4 w-4 shrink-0 text-accent-light"
+                            aria-hidden="true"
+                          />
+                          <span className="text-sm leading-relaxed text-slate-100">
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              </Reveal>
+            ) : (
+              <Reveal key={pkg.title} delay={i * 40}>
+                <li className="grid grid-cols-1 gap-6 border-b border-ink/10 py-8 lg:grid-cols-[1fr_1.3fr] lg:gap-12">
+                  <div>
+                    {pkg.badge && (
+                      <span className="inline-block rounded-full bg-accent-light px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-dark">
+                        {pkg.badge}
+                      </span>
+                    )}
+                    <h3
+                      className={`font-display text-xl font-semibold leading-snug text-navy ${pkg.badge ? "mt-3" : ""}`}
+                    >
+                      {pkg.title}
+                    </h3>
+                    <p className="mt-3 max-w-sm text-sm leading-relaxed text-slate-600">
+                      {pkg.audience}
+                    </p>
+                  </div>
+                  <ul className="grid grid-cols-1 gap-x-8 gap-y-2 self-start sm:grid-cols-2">
+                    {pkg.includes.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <Check
+                          className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                          aria-hidden="true"
+                        />
+                        <span className="text-sm leading-relaxed text-slate-700">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </Reveal>
+            )
+          )}
         </ul>
 
-        <Reveal className="mx-auto mt-14 max-w-2xl text-center">
+        <Reveal className="mt-12 max-w-2xl">
           <p className="text-base leading-relaxed text-slate-600">
             Every engagement starts with a free Automation Opportunity
-            Review. You&rsquo;ll get a measured ROI estimate, a defined
-            scope and a fixed build quote before any work begins.
+            Review. If there&rsquo;s a strong case to dig deeper, the paid
+            Automation Audit &amp; Roadmap gives you a measured ROI
+            estimate, a defined scope and a fixed build quote before any
+            work begins.
           </p>
         </Reveal>
       </div>

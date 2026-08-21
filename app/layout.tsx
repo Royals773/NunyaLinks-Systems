@@ -60,8 +60,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      {/* suppressHydrationWarning here (and on <html> above) only silences
+          the attribute diff on these two nodes — it doesn't hide real
+          mismatches elsewhere. Needed because browser extensions
+          (Grammarly, QuillBot, etc.) inject data-* attributes onto
+          <html>/<body> before React hydrates, which React otherwise flags
+          as a mismatch even though nothing in our render is wrong. */}
+      <body
+        className="min-h-full flex flex-col bg-background text-foreground"
+        suppressHydrationWarning
+      >
         <script
           type="application/ld+json"
           // JSON.stringify output can't contain a literal "</script>" here since

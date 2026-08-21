@@ -9,9 +9,8 @@ import { Logo } from "./Logo";
 const NAV_LINKS = [
   { label: "What We Do", href: "/#what-we-do" },
   { label: "How It Works", href: "/#how-it-works" },
-  { label: "Products", href: "/products" },
   { label: "Packages", href: "/#packages" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Why NunyaLink", href: "/#why-nunyalink" },
 ];
 
 const FOCUSABLE_SELECTOR =
@@ -83,14 +82,14 @@ export default function Header() {
         </Link>
 
         <nav
-          className="hidden items-center gap-8 md:flex"
+          className="hidden items-center gap-9 lg:flex"
           aria-label="Primary"
         >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-slate-600 transition-colors hover:text-navy"
+              className="text-sm font-medium tracking-tight text-slate-600 transition-colors hover:text-ink"
             >
               {link.label}
             </Link>
@@ -99,16 +98,16 @@ export default function Header() {
 
         <Link
           href="/#contact"
-          className="hidden rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-navy-dark md:inline-block"
+          className="hidden rounded-md bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-navy lg:inline-block"
         >
-          Book a Free Opportunity Review
+          Book a Free Review
         </Link>
 
         <button
           ref={toggleButtonRef}
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-navy md:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-ink lg:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -144,7 +143,7 @@ export default function Header() {
           id="mobile-menu"
           ref={menuRef}
           aria-label="Primary"
-          className="border-t border-slate-200 bg-white px-4 pb-4 md:hidden"
+          className="border-t border-slate-200 bg-white px-4 pb-4 lg:hidden"
         >
           <ul className="flex flex-col gap-1 pt-2">
             {NAV_LINKS.map((link) => (
@@ -152,7 +151,7 @@ export default function Header() {
                 <Link
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="block rounded-md px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-navy"
+                  className="block rounded-md px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-ink"
                 >
                   {link.label}
                 </Link>
@@ -162,9 +161,9 @@ export default function Header() {
               <Link
                 href="/#contact"
                 onClick={() => setMenuOpen(false)}
-                className="block rounded-md bg-navy px-3 py-3 text-center text-base font-semibold text-white hover:bg-navy-dark"
+                className="block rounded-md bg-ink px-3 py-3 text-center text-base font-semibold text-white hover:bg-navy"
               >
-                Book a Free Opportunity Review
+                Book a Free Review
               </Link>
             </li>
           </ul>

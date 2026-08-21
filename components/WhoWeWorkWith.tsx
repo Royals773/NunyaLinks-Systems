@@ -18,35 +18,35 @@ export default function WhoWeWorkWith() {
       aria-labelledby="who-we-work-with-heading"
       className="bg-white py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <Reveal>
-          <h2
-            id="who-we-work-with-heading"
-            className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
-          >
-            Who We Work With
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-            We work with SMEs across a range of people-driven industries,
-            including:
-          </p>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.7fr_1fr] lg:gap-16">
+          <Reveal>
+            <h2
+              id="who-we-work-with-heading"
+              className="font-display text-3xl font-semibold tracking-tight text-navy sm:text-4xl"
+            >
+              Who We Work With
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              SMEs across a range of people-driven industries. Our roots are
+              in operations ourselves, so we understand people-driven,
+              compliance-heavy businesses from the inside.
+            </p>
+          </Reveal>
 
-          <ul className="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3">
-            {INDUSTRIES.map((industry) => (
-              <li
-                key={industry}
-                className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-navy"
-              >
-                {industry}
-              </li>
-            ))}
-          </ul>
-
-          <p className="mx-auto mt-10 max-w-2xl text-base italic text-slate-500">
-            Our roots are in operations ourselves — so we understand
-            people-driven, compliance-heavy businesses from the inside.
-          </p>
-        </Reveal>
+          <Reveal delay={60}>
+            <ul className="columns-1 gap-x-10 border-t border-ink/10 pt-5 sm:columns-2">
+              {INDUSTRIES.map((industry) => (
+                <li
+                  key={industry}
+                  className="mb-4 break-inside-avoid text-base leading-snug text-ink"
+                >
+                  {industry}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
