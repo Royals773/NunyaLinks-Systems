@@ -9,6 +9,9 @@ const REQUIRED_TOOLKIT_SLUGS = ["gmail", "googlesheets"];
 export const composioConnectionCheckTask = task({
   id: "composio-connection-check",
   maxDuration: 60,
+  retry: {
+    maxAttempts: 1,
+  },
   run: async () => {
     const userId = process.env.COMPOSIO_USER_ID;
     if (!userId) {
