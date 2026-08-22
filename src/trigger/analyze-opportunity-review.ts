@@ -52,6 +52,9 @@ Strict rules:
 export const analyzeOpportunityReviewTask = task({
   id: "analyze-opportunity-review",
   maxDuration: 60,
+  retry: {
+    maxAttempts: 1,
+  },
   run: async (rawPayload: unknown) => {
     const payload = LeadPayloadSchema.parse(rawPayload);
     const priority = calculatePriority(payload.hoursPerWeek);
