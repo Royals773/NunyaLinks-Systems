@@ -2,6 +2,7 @@ import { logger, task } from "@trigger.dev/sdk";
 import OpenAI from "openai";
 import { zodTextFormat } from "openai/helpers/zod";
 import { z } from "zod";
+import { HoursPerWeekBandSchema, calculatePriority } from "./opportunity-review-shared";
 
 const LeadPayloadSchema = z.object({
   leadId: z.string().min(1),
@@ -14,7 +15,7 @@ const LeadPayloadSchema = z.object({
   industry: z.string().min(1),
   numberOfEmployees: z.string().min(1),
   timeDrainingProcess: z.string().min(1),
-  hoursPerWeek: z.number().nonnegative(),
+  hoursPerWeek: HoursPerWeekBandSchema,
   preferredContact: z.string().min(1),
 });
 
@@ -26,15 +27,6 @@ const OpportunityReviewAnalysisSchema = z.object({
   draftEmailSubject: z.string(),
   draftEmailBody: z.string(),
 });
-
-type Priority = "High" | "Medium" | "Standard";
-
-// Priority is calculated deterministically — never delegated to the model.
-function calculatePriority(hoursPerWeek: number): Priority {
-  if (hoursPerWeek >= 10) return "High";
-  if (hoursPerWeek >= 5) return "Medium";
-  return "Standard";
-}
 
 const INSTRUCTIONS = `You are drafting internal notes and a customer acknowledgement email for NunyaLink Systems, a UK automation consultancy, after someone submits their free Automation Opportunity Review request.
 
@@ -77,7 +69,7 @@ export const analyzeOpportunityReviewTask = task({
             businessLocation: payload.businessLocation,
             numberOfEmployees: payload.numberOfEmployees,
             timeDrainingProcess: payload.timeDrainingProcess,
-            hoursPerWeek: payload.hoursPerWeek,
+            hoursPerWeekEstimate: payload.hoursPerWeek,
             preferredContact: payload.preferredContact,
             fullName: payload.fullName,
           }),

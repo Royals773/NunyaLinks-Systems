@@ -2,6 +2,7 @@ import { logger, task } from "@trigger.dev/sdk";
 import { z } from "zod";
 import { analyzeOpportunityReviewTask } from "./analyze-opportunity-review";
 import { persistOpportunityReviewTask } from "./persist-opportunity-review";
+import { HoursPerWeekBandSchema } from "./opportunity-review-shared";
 
 // Caller-supplied identity — never generated here. The website integration
 // creates and retains this Lead ID across delivery retries, so idempotency
@@ -19,7 +20,7 @@ const ProcessOpportunityReviewInputSchema = z
     industry: z.string().trim().min(1).max(200),
     numberOfEmployees: z.string().trim().min(1).max(50),
     timeDrainingProcess: z.string().trim().min(1).max(2000),
-    hoursPerWeek: z.number().finite().nonnegative(),
+    hoursPerWeek: HoursPerWeekBandSchema,
     preferredContact: z.string().trim().min(1).max(100),
     // Matches the "Automation Rules" business default (Follow-up delay
     // hours: 24). Overridable, not hardcoded, so a future rules change

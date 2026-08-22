@@ -1,6 +1,7 @@
 import { Composio } from "@composio/core";
 import { logger, task } from "@trigger.dev/sdk";
 import { z } from "zod";
+import { HoursPerWeekBandSchema } from "./opportunity-review-shared";
 
 // Pinned toolkit versions — verified against the current tool schemas at
 // build time. Update deliberately, not implicitly. Never "latest".
@@ -34,7 +35,7 @@ const PersistLeadInputSchema = z.object({
   industry: z.string().min(1),
   numberOfEmployees: z.string().min(1),
   timeDrainingProcess: z.string().min(1),
-  hoursPerWeek: z.number().nonnegative(),
+  hoursPerWeek: HoursPerWeekBandSchema,
   preferredContact: z.string().min(1),
   priority: PriorityEnum,
   summary: z.string().min(1),
@@ -133,7 +134,7 @@ function calculateFollowUpDue(submittedAt: string, followUpDelayHours: number): 
   return new Date(submittedMs + followUpDelayHours * 60 * 60 * 1000).toISOString();
 }
 
-function buildLeadsRow(
+export function buildLeadsRow(
   input: PersistLeadInput,
   followUpDueIso: string,
   lastUpdatedIso: string,
