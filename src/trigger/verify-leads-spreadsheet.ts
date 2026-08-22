@@ -1,5 +1,6 @@
 import { Composio } from "@composio/core";
 import { logger, task } from "@trigger.dev/sdk";
+import { HOURS_PER_WEEK_BANDS, calculatePriority, type Priority } from "./opportunity-review-shared";
 
 // Pinned Google Sheets toolkit version — verified against the current
 // tool schemas at build time. Update deliberately, not implicitly.
@@ -30,11 +31,18 @@ const EXPECTED_LEADS_HEADERS = [
   "Last Updated",
 ];
 
-const EXPECTED_AUTOMATION_RULES: [string, string][] = [
+// Derived from the committed shared source of truth (opportunity-review-shared.ts)
+// rather than a second independent priority map — preserves the original
+// band order from HOURS_PER_WEEK_BANDS within each priority group.
+export function bandsForPriority(priority: Priority): string {
+  return HOURS_PER_WEEK_BANDS.filter((band) => calculatePriority(band) === priority).join(", ");
+}
+
+export const EXPECTED_AUTOMATION_RULES: [string, string][] = [
   ["Follow-up delay hours", "24"],
-  ["High-priority minimum hours per week", "10"],
-  ["Medium-priority minimum hours per week", "5"],
-  ["Default priority", "Standard"],
+  ["High-priority hours bands", bandsForPriority("High")],
+  ["Medium-priority hours bands", bandsForPriority("Medium")],
+  ["Standard-priority hours bands", bandsForPriority("Standard")],
   ["Default lead status", "New"],
   ["Time zone", "Europe/London"],
 ];
