@@ -58,6 +58,9 @@ function describePermissionError(error: unknown): string | null {
 export const verifyLeadsSpreadsheetTask = task({
   id: "verify-leads-spreadsheet",
   maxDuration: 60,
+  retry: {
+    maxAttempts: 1,
+  },
   run: async () => {
     const userId = process.env.COMPOSIO_USER_ID;
     const spreadsheetId = process.env.NUNYALINK_LEADS_SHEET_ID;
