@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { tasks } from "@trigger.dev/sdk";
 import {
   HONEYPOT_FIELD_NAME,
   sanitizeAuditPayload,
   validateAuditPayload,
   type AuditRequestPayload,
 } from "@/lib/audit";
+// Type-only: erased at build time, so the task implementation (and its
+// OpenAI / Composio dependencies) is never bundled or registered inside
+// this route. Only @trigger.dev/sdk's lightweight HTTP client runs here.
+import type { processOpportunityReviewTask } from "@/src/trigger/process-opportunity-review";
 
 // Instantiated lazily per-request: constructing eagerly at module load
 // throws if RESEND_API_KEY isn't set yet (e.g. during build-time page data
@@ -195,6 +200,36 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Failed to send confirmation email:", error);
+  }
+
+  // Additive automation: the owner has already received the Resend lead
+  // notification above, so any failure here must never affect the
+  // visitor's response. Disabled unless the flag is exactly "true".
+  if (process.env.NUNYALINK_AUTOMATION_ENABLED === "true") {
+    try {
+      await tasks.trigger<typeof processOpportunityReviewTask>(
+        "process-opportunity-review",
+        {
+          leadId: `WEB-${data.submissionId}`,
+          submittedAt: new Date().toISOString(),
+          fullName: data.fullName,
+          businessName: data.businessName,
+          email: data.email,
+          phone: data.phone || null,
+          businessLocation: data.location,
+          industry: data.industry,
+          numberOfEmployees: data.employees,
+          timeDrainingProcess: data.process,
+          hoursPerWeek: data.hoursPerWeek,
+          preferredContact: data.contactMethod,
+          followUpDelayHours: 24,
+          dryRun: false,
+        },
+        { idempotencyKey: `opportunity-review:${data.submissionId}` }
+      );
+    } catch {
+      console.error("Automation enqueue failed.");
+    }
   }
 
   return NextResponse.json({ ok: true });

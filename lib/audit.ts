@@ -35,16 +35,27 @@ export interface AuditRequestPayload {
   process: string;
   hoursPerWeek: string;
   contactMethod: string;
+  /** Client-generated, stable across retries of the same submission. */
+  submissionId: string;
 }
 
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Matches a standard UUID (any version) in canonical hyphenated form. */
+export const UUID_REGEX =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** Fields that must be non-empty for a submission to be valid. */
 export const REQUIRED_FIELDS: (keyof AuditRequestPayload)[] = [
   "fullName",
   "businessName",
   "email",
+  "location",
+  "industry",
+  "employees",
   "process",
+  "hoursPerWeek",
+  "contactMethod",
 ];
 
 /** Per-field character caps applied server-side before use. */
@@ -59,6 +70,7 @@ export const FIELD_MAX_LENGTHS: Record<keyof AuditRequestPayload, number> = {
   process: 4000,
   hoursPerWeek: 20,
   contactMethod: 20,
+  submissionId: 36,
 };
 
 /**
@@ -94,6 +106,12 @@ export function validateAuditPayload(
   }
   if (!EMAIL_REGEX.test(payload.email ?? "")) {
     return "Please enter a valid email address.";
+  }
+  if (!(HOURS_OPTIONS as readonly string[]).includes(payload.hoursPerWeek ?? "")) {
+    return "Please select a valid estimate for hours per week.";
+  }
+  if (!UUID_REGEX.test(payload.submissionId ?? "")) {
+    return "Invalid request.";
   }
   return null;
 }

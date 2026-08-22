@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Loader2, CheckCircle2, AlertCircle, Mail } from "lucide-react";
 import {
   INDUSTRY_OPTIONS,
@@ -14,7 +14,7 @@ import {
 import { ENQUIRIES_EMAIL, ENQUIRIES_MAILTO } from "@/lib/site";
 import Reveal from "./Reveal";
 
-const INITIAL_FORM: AuditRequestPayload = {
+const INITIAL_FORM: Omit<AuditRequestPayload, "submissionId"> = {
   fullName: "",
   businessName: "",
   email: "",
@@ -27,16 +27,20 @@ const INITIAL_FORM: AuditRequestPayload = {
   contactMethod: "",
 };
 
-type FormErrors = Partial<Record<keyof AuditRequestPayload, string>>;
+type FormFields = typeof INITIAL_FORM;
+type FormErrors = Partial<Record<keyof FormFields, string>>;
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-const REQUIRED_FIELD_LABELS: Partial<
-  Record<keyof AuditRequestPayload, string>
-> = {
+const REQUIRED_FIELD_LABELS: Partial<Record<keyof FormFields, string>> = {
   fullName: "Please enter your full name.",
   businessName: "Please enter your business name.",
   email: "Please enter your email address.",
+  location: "Please enter your business location.",
+  industry: "Please select your industry.",
+  employees: "Please select your number of employees.",
   process: "Please tell us what task or process wastes the most time.",
+  hoursPerWeek: "Please select roughly how many hours a week it takes.",
+  contactMethod: "Please select a preferred contact method.",
 };
 
 // Focus indication is handled site-wide by the global :focus-visible
@@ -52,15 +56,24 @@ function fieldClasses(hasError: boolean) {
 }
 
 export default function AuditForm() {
-  const [formData, setFormData] = useState<AuditRequestPayload>(INITIAL_FORM);
+  const [formData, setFormData] = useState<FormFields>(INITIAL_FORM);
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
 
-  function updateField<K extends keyof AuditRequestPayload>(
+  // Stable across retries of the same submission: a failed request keeps
+  // this ID so a resubmit reuses it, and it's only rotated after a
+  // genuine success. A ref (not state) so re-renders never regenerate it,
+  // and lazily initialised so it's only ever generated once per mount.
+  const submissionIdRef = useRef<string | null>(null);
+  if (submissionIdRef.current === null) {
+    submissionIdRef.current = crypto.randomUUID();
+  }
+
+  function updateField<K extends keyof FormFields>(
     field: K,
-    value: AuditRequestPayload[K]
+    value: FormFields[K]
   ) {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
@@ -69,7 +82,7 @@ export default function AuditForm() {
     const nextErrors: FormErrors = {};
 
     for (const field of Object.keys(REQUIRED_FIELD_LABELS) as Array<
-      keyof AuditRequestPayload
+      keyof FormFields
     >) {
       if (!formData[field].trim()) {
         nextErrors[field] = REQUIRED_FIELD_LABELS[field];
@@ -100,6 +113,7 @@ export default function AuditForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          submissionId: submissionIdRef.current,
           [HONEYPOT_FIELD_NAME]: honeypot,
         }),
       });
@@ -115,6 +129,8 @@ export default function AuditForm() {
         return;
       }
 
+      // Success: rotate the ID so the next genuine enquiry gets a new one.
+      submissionIdRef.current = crypto.randomUUID();
       setStatus("success");
     } catch {
       setServerError(
@@ -287,25 +303,45 @@ export default function AuditForm() {
                 />
               </Field>
 
-              <Field id="location" label="Business location">
+              <Field
+                id="location"
+                label="Business location"
+                required
+                error={errors.location}
+              >
                 <input
                   id="location"
                   name="location"
                   type="text"
                   autoComplete="address-level2"
+                  required
                   value={formData.location}
                   onChange={(e) => updateField("location", e.target.value)}
-                  className={fieldClasses(false)}
+                  className={fieldClasses(!!errors.location)}
+                  aria-invalid={!!errors.location}
+                  aria-describedby={
+                    errors.location ? "location-error" : undefined
+                  }
                 />
               </Field>
 
-              <Field id="industry" label="Industry">
+              <Field
+                id="industry"
+                label="Industry"
+                required
+                error={errors.industry}
+              >
                 <select
                   id="industry"
                   name="industry"
+                  required
                   value={formData.industry}
                   onChange={(e) => updateField("industry", e.target.value)}
-                  className={fieldClasses(false)}
+                  className={fieldClasses(!!errors.industry)}
+                  aria-invalid={!!errors.industry}
+                  aria-describedby={
+                    errors.industry ? "industry-error" : undefined
+                  }
                 >
                   <option value="">Select an industry</option>
                   {INDUSTRY_OPTIONS.map((option) => (
@@ -316,13 +352,23 @@ export default function AuditForm() {
                 </select>
               </Field>
 
-              <Field id="employees" label="Number of employees">
+              <Field
+                id="employees"
+                label="Number of employees"
+                required
+                error={errors.employees}
+              >
                 <select
                   id="employees"
                   name="employees"
+                  required
                   value={formData.employees}
                   onChange={(e) => updateField("employees", e.target.value)}
-                  className={fieldClasses(false)}
+                  className={fieldClasses(!!errors.employees)}
+                  aria-invalid={!!errors.employees}
+                  aria-describedby={
+                    errors.employees ? "employees-error" : undefined
+                  }
                 >
                   <option value="">Select a range</option>
                   {EMPLOYEE_OPTIONS.map((option) => (
@@ -356,15 +402,22 @@ export default function AuditForm() {
               <Field
                 id="hoursPerWeek"
                 label="Roughly how many hours a week it takes"
+                required
+                error={errors.hoursPerWeek}
               >
                 <select
                   id="hoursPerWeek"
                   name="hoursPerWeek"
+                  required
                   value={formData.hoursPerWeek}
                   onChange={(e) =>
                     updateField("hoursPerWeek", e.target.value)
                   }
-                  className={fieldClasses(false)}
+                  className={fieldClasses(!!errors.hoursPerWeek)}
+                  aria-invalid={!!errors.hoursPerWeek}
+                  aria-describedby={
+                    errors.hoursPerWeek ? "hoursPerWeek-error" : undefined
+                  }
                 >
                   <option value="">Select an estimate</option>
                   {HOURS_OPTIONS.map((option) => (
@@ -378,6 +431,10 @@ export default function AuditForm() {
               <fieldset>
                 <legend className="mb-2 block text-sm font-semibold text-navy">
                   Preferred contact method
+                  <span className="ml-1 text-red-500" aria-hidden="true">
+                    *
+                  </span>
+                  <span className="sr-only"> (required)</span>
                 </legend>
                 <div className="flex flex-wrap gap-x-6 gap-y-3">
                   {CONTACT_METHOD_OPTIONS.map((option) => (
@@ -391,16 +448,31 @@ export default function AuditForm() {
                         type="radio"
                         name="contactMethod"
                         value={option}
+                        required
                         checked={formData.contactMethod === option}
                         onChange={(e) =>
                           updateField("contactMethod", e.target.value)
                         }
                         className="h-4 w-4 text-accent"
+                        aria-describedby={
+                          errors.contactMethod
+                            ? "contactMethod-error"
+                            : undefined
+                        }
                       />
                       {option}
                     </label>
                   ))}
                 </div>
+                {errors.contactMethod && (
+                  <p
+                    id="contactMethod-error"
+                    role="alert"
+                    className="mt-1.5 text-sm text-red-600"
+                  >
+                    {errors.contactMethod}
+                  </p>
+                )}
               </fieldset>
 
               <button
