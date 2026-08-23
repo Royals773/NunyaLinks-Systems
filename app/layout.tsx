@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Inter, Fraunces } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
+
+// The only client component mounted on every route — code-split it out
+// of the shared layout bundle. Still server-rendered (ssr defaults to
+// true; next/dynamic's ssr: false isn't allowed from a Server Component
+// like this layout), so there's no loading flash.
+const AssistantWidget = dynamic(() => import("@/components/AssistantWidget"));
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,6 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <AssistantWidget />
       </body>
     </html>
   );
