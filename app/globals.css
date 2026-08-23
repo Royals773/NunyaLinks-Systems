@@ -30,6 +30,11 @@
   --color-teal: #0e7c86;
   --color-teal-bright: #2bb3e0;
   --color-teal-light: #e7f6f9;
+
+  /* AI assistant avatar accent — a single restrained gold, used only for
+     the small sparkle mark on the assistant's avatar. Not part of the
+     main brand palette; kept scoped and minimal by design. */
+  --color-gold: #c9a227;
 }
 
 /*

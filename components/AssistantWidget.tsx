@@ -8,7 +8,8 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { MessageCircle, X, Send, Loader2, ArrowRight } from "lucide-react";
+import { X, Send, Loader2, ArrowRight } from "lucide-react";
+import { AssistantAvatar } from "./AssistantAvatar";
 import {
   CLIENT_TIMEOUT_MS,
   MAX_MESSAGE_LENGTH,
@@ -234,7 +235,7 @@ export default function AssistantWidget() {
           aria-label="Open NunyaLink AI assistant"
           className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-ink text-white shadow-lg transition-colors hover:bg-navy sm:bottom-6 sm:right-6"
         >
-          <MessageCircle className="h-6 w-6" aria-hidden="true" />
+          <AssistantAvatar className="h-9 w-9" />
         </button>
       )}
 
@@ -281,11 +282,14 @@ export default function AssistantWidget() {
             aria-label="Conversation with NunyaLink's AI assistant"
             className="flex-1 space-y-4 overflow-y-auto px-5 py-4"
           >
-            <div className="rounded-lg bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
-              Hello — I&rsquo;m NunyaLink&rsquo;s AI assistant. I can answer
-              questions about what NunyaLink does, help you work out which
-              service might fit, and point you to the free Automation
-              Opportunity Review when you&rsquo;re ready.
+            <div className="flex max-w-[85%] items-start gap-2">
+              <AssistantAvatar className="mt-0.5 h-6 w-6" />
+              <div className="min-w-0 flex-1 rounded-lg bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
+                Hello — I&rsquo;m NunyaLink&rsquo;s AI assistant. I can answer
+                questions about what NunyaLink does, help you work out which
+                service might fit, and point you to the free Automation
+                Opportunity Review when you&rsquo;re ready.
+              </div>
             </div>
 
             {messages.length === 0 && (
@@ -303,24 +307,22 @@ export default function AssistantWidget() {
               </div>
             )}
 
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={
-                  message.role === "user" ? "flex justify-end" : "flex justify-start"
-                }
-              >
-                <p
-                  className={
-                    message.role === "user"
-                      ? "max-w-[85%] rounded-lg rounded-br-sm bg-ink px-3.5 py-2.5 text-sm leading-relaxed text-white"
-                      : "max-w-[85%] rounded-lg rounded-bl-sm bg-slate-50 px-3.5 py-2.5 text-sm leading-relaxed text-slate-700"
-                  }
-                >
-                  {message.content}
-                </p>
-              </div>
-            ))}
+            {messages.map((message, index) =>
+              message.role === "user" ? (
+                <div key={index} className="flex justify-end">
+                  <p className="max-w-[85%] rounded-lg rounded-br-sm bg-ink px-3.5 py-2.5 text-sm leading-relaxed text-white">
+                    {message.content}
+                  </p>
+                </div>
+              ) : (
+                <div key={index} className="flex max-w-[85%] items-start gap-2">
+                  <AssistantAvatar className="mt-0.5 h-6 w-6" />
+                  <p className="min-w-0 flex-1 rounded-lg rounded-bl-sm bg-slate-50 px-3.5 py-2.5 text-sm leading-relaxed text-slate-700">
+                    {message.content}
+                  </p>
+                </div>
+              )
+            )}
 
             {status === "sending" && (
               <div className="flex items-center gap-2 text-sm text-slate-500">
