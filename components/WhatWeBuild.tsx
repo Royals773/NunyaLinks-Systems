@@ -83,7 +83,7 @@ export default function WhatWeBuild() {
                 {LEAD.description}
               </p>
               <div className="mt-auto border-t border-ink/10 pt-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
                   Feeds directly into
                 </p>
                 <p className="mt-2.5 text-sm leading-relaxed text-ink">

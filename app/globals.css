@@ -63,6 +63,25 @@ section[id] {
   scroll-margin-top: 5.5rem;
 }
 
+/* Keyboard-only skip link: off-screen until focused, then docked above
+   the sticky header so it's never obscured or clipped by it. */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  border-radius: 0.375rem;
+  background: var(--color-ink);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
 /*
  * Consistent focus-visible ring in the brand blue for every interactive
  * element. Two-tone (white + accent) so it stays visible at 3:1+ contrast

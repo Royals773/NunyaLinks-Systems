@@ -144,7 +144,7 @@ export default function AuditForm() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="bg-slate-50 py-20 sm:py-28"
+      className="bg-white py-20 sm:py-28"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-10 text-center">
@@ -172,7 +172,7 @@ export default function AuditForm() {
           {status === "success" ? (
             <div
               role="status"
-              className="mx-auto flex max-w-xl flex-col items-center rounded-lg border border-slate-200 bg-white p-10 text-center shadow-sm"
+              className="mx-auto flex max-w-xl flex-col items-center rounded-lg border border-slate-200 bg-slate-50 p-10 text-center shadow-sm"
             >
               <CheckCircle2
                 className="h-12 w-12 text-accent"
@@ -188,7 +188,7 @@ export default function AuditForm() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="mx-auto max-w-xl space-y-6 rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+              className="mx-auto max-w-xl space-y-6 rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8"
             >
               {/* Honeypot: hidden from real users, catches simple bots. */}
               <div

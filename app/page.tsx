@@ -7,7 +7,6 @@ import WhatWeBuild from "@/components/WhatWeBuild";
 import ExampleSystems from "@/components/ExampleSystems";
 import SelectedWork from "@/components/SelectedWork";
 import WhoWeWorkWith from "@/components/WhoWeWorkWith";
-import FounderSection from "@/components/FounderSection";
 import WhyUs from "@/components/WhyUs";
 import HowItWorks from "@/components/HowItWorks";
 import Packages from "@/components/Packages";
@@ -19,7 +18,7 @@ const AuditForm = dynamic(() => import("@/components/AuditForm"));
 
 export default function Home() {
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Hero />
       <ProblemSection />
       <WhatWeDo />
@@ -28,7 +27,6 @@ export default function Home() {
       <ExampleSystems />
       <SelectedWork />
       <WhoWeWorkWith />
-      <FounderSection />
       <WhyUs />
       <HowItWorks />
       <Packages />

@@ -22,7 +22,7 @@ export default function BeforeAfterFlow() {
   return (
     <div className="mt-14">
       <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-x-6 border-t border-ink/10 sm:grid">
-        <span className="pb-3 pt-5 text-xs font-semibold uppercase tracking-widest text-slate-400">
+        <span className="pb-3 pt-5 text-xs font-semibold uppercase tracking-widest text-slate-500">
           Today
         </span>
         <span aria-hidden="true" className="pb-3 pt-5" />

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, ImageOff } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { WORK_ITEMS } from "@/lib/work";
+import MediaPlaceholder from "./MediaPlaceholder";
 import Reveal from "./Reveal";
 
 /**
@@ -37,13 +38,10 @@ export default function SelectedWork() {
 
         <Reveal delay={60}>
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm sm:grid-cols-2">
-            <div
-              className="flex min-h-56 flex-col items-center justify-center gap-2 border-b border-dashed border-slate-300 bg-slate-50 text-slate-400 sm:min-h-full sm:border-b-0 sm:border-r"
-              aria-hidden="true"
-            >
-              <ImageOff className="h-7 w-7" />
-              <p className="text-sm">Product visual to be added</p>
-            </div>
+            <MediaPlaceholder
+              label={featured.name}
+              className="min-h-56 sm:min-h-full"
+            />
 
             <div className="flex flex-col justify-center p-8 sm:p-10">
               <div className="flex flex-wrap items-center gap-2">

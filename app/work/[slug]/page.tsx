@@ -38,7 +38,7 @@ export default async function WorkDetailPage({
   if (!item) notFound();
 
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       {/* Hero */}
       <section className="bg-navy py-16 text-white sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -195,9 +195,9 @@ export default async function WorkDetailPage({
             {item.recommendedScreenshots.map((label) => (
               <div
                 key={label}
-                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-slate-400"
+                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-slate-500"
               >
-                <ImageOff className="h-6 w-6" aria-hidden="true" />
+                <ImageOff className="h-6 w-6 text-slate-400" aria-hidden="true" />
                 <p className="text-sm font-medium text-slate-500">{label}</p>
                 <p className="text-xs">Screenshot to be added</p>
               </div>

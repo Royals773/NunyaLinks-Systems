@@ -32,7 +32,7 @@ export default async function ProductDetailPage({
   if (!product) notFound();
 
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <section className="bg-teal-deep py-16 text-white sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Reveal>
@@ -109,8 +109,8 @@ export default async function ProductDetailPage({
           className="bg-slate-50 py-16 sm:py-20"
         >
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 bg-white px-6 py-16 text-slate-400">
-              <ImageOff className="h-8 w-8" aria-hidden="true" />
+            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 bg-white px-6 py-16 text-slate-500">
+              <ImageOff className="h-8 w-8 text-slate-400" aria-hidden="true" />
               <p className="mt-3 text-sm">Screenshots coming soon.</p>
             </div>
           </div>
