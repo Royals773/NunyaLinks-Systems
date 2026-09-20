@@ -50,7 +50,7 @@ export default function WhatWeBuild() {
     <section
       id="what-we-build"
       aria-labelledby="what-we-build-heading"
-      className="bg-slate-50 py-20 sm:py-28"
+      className="bg-slate-50 py-14 sm:py-20"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal className="max-w-2xl">

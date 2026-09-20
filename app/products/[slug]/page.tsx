@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ImageOff } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { PRODUCTS, getProductBySlug } from "@/lib/products";
 import ProductStatusBadge from "@/components/ProductStatusBadge";
 import ProductCtaButton from "@/components/ProductCtaButton";
+import MediaPlaceholder from "@/components/MediaPlaceholder";
+import WealthCircleOverview from "@/components/WealthCircleOverview";
 import Reveal from "@/components/Reveal";
 
 export function generateStaticParams() {
@@ -105,14 +107,15 @@ export default async function ProductDetailPage({
         </section>
       ) : (
         <section
-          aria-label="Product screenshots"
+          aria-label="Product overview"
           className="bg-slate-50 py-16 sm:py-20"
         >
-          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 bg-white px-6 py-16 text-slate-500">
-              <ImageOff className="h-8 w-8 text-slate-400" aria-hidden="true" />
-              <p className="mt-3 text-sm">Screenshots coming soon.</p>
-            </div>
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            {product.slug === "wealthcircle" ? (
+              <WealthCircleOverview className="rounded-lg py-16" />
+            ) : (
+              <MediaPlaceholder label={product.name} className="rounded-lg py-16" />
+            )}
           </div>
         </section>
       )}

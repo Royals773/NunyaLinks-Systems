@@ -4,7 +4,6 @@ import {
   BellRing,
   UserCheck,
   LayoutDashboard,
-  MessageCircle,
   AlertCircle,
   Workflow,
   TrendingUp,
@@ -59,14 +58,6 @@ const EXAMPLES: Example[] = [
       "Key numbers from your existing tools, pulled into one view, updated automatically.",
     outcome: "Less time compiling reports, more time acting on them.",
   },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp & email, one system",
-    problem:
-      "Enquiries land wherever a customer reaches you, tracked in someone's head or a spreadsheet.",
-    system: "Every channel feeds into the same structured record, however it arrived.",
-    outcome: "One place to see every enquiry, from any channel.",
-  },
 ];
 
 const STAGES: {
@@ -84,7 +75,7 @@ export default function ExampleSystems() {
     <section
       id="example-systems"
       aria-labelledby="example-systems-heading"
-      className="bg-white py-20 sm:py-28"
+      className="bg-white py-14 sm:py-20"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -151,15 +142,6 @@ export default function ExampleSystems() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal className="mx-auto mt-10 max-w-2xl text-center">
-          <p className="text-sm text-slate-500">
-            Every business is different — these show the shape of what&rsquo;s
-            possible. A free Automation Opportunity Review looks at your
-            actual processes and identifies what&rsquo;s worth investigating
-            first.
-          </p>
-        </Reveal>
       </div>
     </section>
   );

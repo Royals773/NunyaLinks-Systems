@@ -4,7 +4,7 @@ export default function RoiSection() {
   return (
     <section
       aria-labelledby="roi-heading"
-      className="bg-ink py-20 text-white sm:py-28"
+      className="bg-ink py-14 text-white sm:py-20"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <Reveal className="max-w-2xl">

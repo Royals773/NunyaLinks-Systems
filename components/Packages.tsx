@@ -90,7 +90,7 @@ export default function Packages() {
     <section
       id="packages"
       aria-labelledby="packages-heading"
-      className="bg-slate-50 py-20 sm:py-28"
+      className="bg-slate-50 py-14 sm:py-20"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <Reveal className="max-w-2xl">
@@ -221,16 +221,6 @@ export default function Packages() {
             )
           )}
         </ul>
-
-        <Reveal className="mt-12 max-w-2xl">
-          <p className="text-base leading-relaxed text-slate-600">
-            Every engagement starts with a free Automation Opportunity
-            Review. If there&rsquo;s a strong case to dig deeper, the paid
-            Automation Audit &amp; Roadmap gives you a measured ROI
-            estimate, a defined scope and a fixed build quote before any
-            work begins.
-          </p>
-        </Reveal>
       </div>
     </section>
   );

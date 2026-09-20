@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { WORK_ITEMS } from "@/lib/work";
 import MediaPlaceholder from "./MediaPlaceholder";
+import WealthCircleOverview from "./WealthCircleOverview";
 import Reveal from "./Reveal";
 
 /**
@@ -17,7 +18,7 @@ export default function SelectedWork() {
   return (
     <section
       aria-labelledby="selected-work-heading"
-      className="bg-slate-50 py-20 sm:py-28"
+      className="bg-slate-50 py-14 sm:py-20"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -38,10 +39,14 @@ export default function SelectedWork() {
 
         <Reveal delay={60}>
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm sm:grid-cols-2">
-            <MediaPlaceholder
-              label={featured.name}
-              className="min-h-56 sm:min-h-full"
-            />
+            {featured.slug === "wealth-circle" ? (
+              <WealthCircleOverview className="min-h-56 sm:min-h-full" />
+            ) : (
+              <MediaPlaceholder
+                label={featured.name}
+                className="min-h-56 sm:min-h-full"
+              />
+            )}
 
             <div className="flex flex-col justify-center p-8 sm:p-10">
               <div className="flex flex-wrap items-center gap-2">

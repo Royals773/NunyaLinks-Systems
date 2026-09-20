@@ -2,25 +2,36 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 
 // Homepage-section links are prefixed with "/" so they work correctly
-// from any route, not just when already on the homepage.
+// from any route, not just when already on the homepage. Work and
+// Products are real routes (not homepage anchors), so they get an
+// active state based on the current pathname — see isActive below.
 const NAV_LINKS = [
   { label: "What We Do", href: "/#what-we-do" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Packages", href: "/#packages" },
   { label: "Why NunyaLink", href: "/#why-nunyalink" },
+  { label: "Work", href: "/work" },
+  { label: "Products", href: "/products" },
 ];
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+/** Real routes (not homepage anchors) get an active nav state. */
+function isActiveRoute(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -82,32 +93,38 @@ export default function Header() {
         </Link>
 
         <nav
-          className="hidden items-center gap-9 lg:flex"
+          className="hidden items-center gap-6 xl:flex"
           aria-label="Primary"
         >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium tracking-tight text-slate-600 transition-colors hover:text-ink"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = !link.href.includes("#") && isActiveRoute(pathname, link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`text-sm font-medium tracking-tight transition-colors hover:text-ink ${
+                  active ? "text-ink" : "text-slate-600"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <Link
           href="/#contact"
-          className="hidden rounded-md bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-navy lg:inline-block"
+          className="hidden whitespace-nowrap rounded-md bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-navy xl:inline-block"
         >
-          Book a Free Review
+          Book a Free Opportunity Review
         </Link>
 
         <button
           ref={toggleButtonRef}
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-ink lg:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-ink xl:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -143,27 +160,33 @@ export default function Header() {
           id="mobile-menu"
           ref={menuRef}
           aria-label="Primary"
-          className="border-t border-slate-200 bg-white px-4 pb-4 lg:hidden"
+          className="border-t border-slate-200 bg-white px-4 pb-4 xl:hidden"
         >
           <ul className="flex flex-col gap-1 pt-2">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block rounded-md px-3 py-2.5 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-ink"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = !link.href.includes("#") && isActiveRoute(pathname, link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`block rounded-md px-3 py-2.5 text-base font-medium hover:bg-slate-50 hover:text-ink ${
+                      active ? "text-ink" : "text-slate-700"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
             <li className="pt-2">
               <Link
                 href="/#contact"
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-md bg-ink px-3 py-3 text-center text-base font-semibold text-white hover:bg-navy"
               >
-                Book a Free Review
+                Book a Free Opportunity Review
               </Link>
             </li>
           </ul>
