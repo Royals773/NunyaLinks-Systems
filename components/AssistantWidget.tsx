@@ -104,8 +104,8 @@ export default function AssistantWidget() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, status]);
 
-  // If "Book a free review" was used from a page other than the homepage,
-  // finish the job once the client-side navigation to "/" lands.
+  // If "Book a Free Opportunity Review" was used from a page other than
+  // the homepage, finish the job once the client-side navigation to "/" lands.
   useEffect(() => {
     if (pathname === "/" && pendingReviewFocusRef.current) {
       pendingReviewFocusRef.current = false;
@@ -356,7 +356,7 @@ export default function AssistantWidget() {
               onClick={handleBookReview}
               className="flex w-full items-center justify-center gap-1.5 rounded-md border border-accent/30 bg-accent-light/40 px-3.5 py-2 text-sm font-semibold text-accent-dark transition-colors hover:bg-accent-light"
             >
-              Book a free review
+              Book a Free Opportunity Review
               <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </button>
 

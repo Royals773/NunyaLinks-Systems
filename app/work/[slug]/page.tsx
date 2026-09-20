@@ -5,13 +5,15 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  ImageOff,
   Lock,
   ShieldCheck,
 } from "lucide-react";
 import { WORK_ITEMS, getWorkBySlug } from "@/lib/work";
+import { getProductBySlug } from "@/lib/products";
 import Reveal from "@/components/Reveal";
 import WorkflowStrip from "@/components/work/WorkflowStrip";
+import MediaPlaceholder from "@/components/MediaPlaceholder";
+import WealthCircleOverview from "@/components/WealthCircleOverview";
 
 export function generateStaticParams() {
   return WORK_ITEMS.map((item) => ({ slug: item.slug }));
@@ -36,6 +38,9 @@ export default async function WorkDetailPage({
   const { slug } = await params;
   const item = getWorkBySlug(slug);
   if (!item) notFound();
+
+  const productSlug = item.productHref?.split("/").filter(Boolean).pop();
+  const product = productSlug ? getProductBySlug(productSlug) : undefined;
 
   return (
     <main id="main-content" className="flex-1">
@@ -84,6 +89,40 @@ export default async function WorkDetailPage({
                 </Link>
               )}
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* At a glance */}
+      <section aria-label="At a glance" className="bg-slate-50 py-12 sm:py-14">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <Reveal>
+            <dl className="grid grid-cols-1 gap-x-8 gap-y-6 border-y border-slate-200 py-6 sm:grid-cols-3">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                  Status
+                </dt>
+                <dd className="mt-1.5 text-base font-semibold text-navy">
+                  {item.statusLabel}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                  Built for
+                </dt>
+                <dd className="mt-1.5 text-sm leading-relaxed text-slate-700">
+                  {product?.builtFor?.join(", ") ?? item.type}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                  Designed to
+                </dt>
+                <dd className="mt-1.5 text-sm leading-relaxed text-slate-700">
+                  {product?.tagline ?? item.tagline}
+                </dd>
+              </div>
+            </dl>
           </Reveal>
         </div>
       </section>
@@ -186,23 +225,34 @@ export default async function WorkDetailPage({
               What it looks like
             </h2>
             <p className="mt-3 text-base text-slate-600">
-              Real product screenshots haven&rsquo;t been added to this page
-              yet. Here&rsquo;s exactly what would go here.
+              An overview of {item.name}, and the views a group&rsquo;s
+              committee works from day to day.
             </p>
           </Reveal>
 
-          <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
-            {item.recommendedScreenshots.map((label) => (
-              <div
-                key={label}
-                className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-slate-500"
-              >
-                <ImageOff className="h-6 w-6 text-slate-400" aria-hidden="true" />
-                <p className="text-sm font-medium text-slate-500">{label}</p>
-                <p className="text-xs">Screenshot to be added</p>
-              </div>
-            ))}
-          </div>
+          <Reveal delay={40} className="mx-auto mt-10 max-w-md">
+            {item.slug === "wealth-circle" ? (
+              <WealthCircleOverview className="rounded-lg" />
+            ) : (
+              <MediaPlaceholder label={item.name} className="rounded-lg py-16" />
+            )}
+          </Reveal>
+
+          <Reveal delay={80}>
+            <ul className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+              {item.recommendedScreenshots.map((label) => (
+                <li key={label} className="flex items-start gap-2.5 text-left">
+                  <CheckCircle2
+                    className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                    aria-hidden="true"
+                  />
+                  <span className="text-sm leading-relaxed text-slate-700">
+                    {label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 

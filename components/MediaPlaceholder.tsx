@@ -9,11 +9,11 @@ interface MediaPlaceholderProps {
  * Deliberately not a "broken image" treatment (dashed border, grey icon) —
  * reuses the logo's connected-nodes motif at low opacity on an ink panel,
  * so an empty slot still reads as a deliberate brand surface rather than
- * an unfinished one.
+ * an unfinished one. Says what the panel is, not what it's missing.
  */
 export default function MediaPlaceholder({
   label,
-  eyebrow = "Visual to be added",
+  eyebrow = "Product overview",
   className = "",
 }: MediaPlaceholderProps) {
   return (

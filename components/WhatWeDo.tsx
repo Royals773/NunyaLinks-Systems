@@ -6,7 +6,7 @@ export default function WhatWeDo() {
     <section
       id="what-we-do"
       aria-labelledby="what-we-do-heading"
-      className="bg-white py-20 sm:py-28"
+      className="bg-white py-14 sm:py-20"
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Reveal>

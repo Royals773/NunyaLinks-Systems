@@ -2,10 +2,9 @@ import Reveal from "./Reveal";
 
 const PAIN_POINTS = [
   "Chasing enquiries and following up leads by hand",
-  "Re-typing the same information across apps and spreadsheets",
+  "Re-typing the same information across apps, spreadsheets and messages",
   "Manually reminding people about payments, documents or deadlines",
   "Onboarding staff or customers through slow, inconsistent steps",
-  "Copying data between messaging apps, email and records",
   "Reporting that only happens when someone finds the time",
 ];
 
@@ -13,7 +12,7 @@ export default function ProblemSection() {
   return (
     <section
       aria-labelledby="problem-heading"
-      className="bg-slate-50 py-20 sm:py-28"
+      className="bg-slate-50 py-14 sm:py-20"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1fr] lg:gap-16">
@@ -26,9 +25,8 @@ export default function ProblemSection() {
               free.
             </h2>
             <p className="mt-5 max-w-sm text-base leading-relaxed text-slate-600">
-              The signs are familiar in almost every growing business. Every
-              hour spent here is an hour not spent serving customers or
-              growing.
+              Every hour spent here is an hour not spent serving customers
+              or growing the business.
             </p>
           </Reveal>
 

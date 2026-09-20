@@ -16,10 +16,9 @@ export const COMPANY_OVERVIEW =
 // ProblemSection.tsx
 export const COMMON_PAIN_POINTS = [
   "Chasing enquiries and following up leads by hand",
-  "Re-typing the same information across apps and spreadsheets",
+  "Re-typing the same information across apps, spreadsheets and messages",
   "Manually reminding people about payments, documents or deadlines",
   "Onboarding staff or customers through slow, inconsistent steps",
-  "Copying data between messaging apps, email and records",
   "Reporting that only happens when someone finds the time",
 ];
 

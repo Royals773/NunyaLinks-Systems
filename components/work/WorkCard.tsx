@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { WorkItem } from "@/lib/work";
 import MediaPlaceholder from "../MediaPlaceholder";
+import WealthCircleOverview from "../WealthCircleOverview";
 
 interface WorkCardProps {
   item: WorkItem;
@@ -13,7 +14,11 @@ export default function WorkCard({ item, className = "" }: WorkCardProps) {
     <li
       className={`flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md ${className}`}
     >
-      <MediaPlaceholder label={item.name} className="h-36" />
+      {item.slug === "wealth-circle" ? (
+        <WealthCircleOverview compact className="h-36" />
+      ) : (
+        <MediaPlaceholder label={item.name} className="h-36" />
+      )}
 
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-2">

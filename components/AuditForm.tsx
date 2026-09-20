@@ -43,6 +43,32 @@ const REQUIRED_FIELD_LABELS: Partial<Record<keyof FormFields, string>> = {
   contactMethod: "Please select a preferred contact method.",
 };
 
+// Two-step grouping: contact/business details first, then the
+// qualification detail that determines fit. Both steps feed the same
+// formData object and the same final payload — nothing about the
+// request shape changes, only how the fields are presented.
+const STEP_1_FIELDS: (keyof FormFields)[] = [
+  "fullName",
+  "businessName",
+  "email",
+  "phone",
+  "location",
+  "contactMethod",
+];
+const STEP_2_FIELDS: (keyof FormFields)[] = [
+  "industry",
+  "employees",
+  "process",
+  "hoursPerWeek",
+];
+
+/** contactMethod has no single input of its own — its first radio stands in for focus purposes. */
+function focusTargetId(field: keyof FormFields): string {
+  return field === "contactMethod"
+    ? `contactMethod-${CONTACT_METHOD_OPTIONS[0]}`
+    : field;
+}
+
 // Focus indication is handled site-wide by the global :focus-visible
 // ring in globals.css, so inputs only need to suppress the browser's
 // default outline here rather than defining their own ring.
@@ -61,6 +87,8 @@ export default function AuditForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
+  const [step, setStep] = useState<1 | 2>(1);
+  const stepHeadingRef = useRef<HTMLHeadingElement>(null);
 
   // Stable across retries of the same submission: a failed request keeps
   // this ID so a resubmit reuses it, and it's only rotated after a
@@ -78,31 +106,64 @@ export default function AuditForm() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
-  function validate(): FormErrors {
+  /** Validates only the given fields; omit to validate the whole form. */
+  function validate(fields?: (keyof FormFields)[]): FormErrors {
     const nextErrors: FormErrors = {};
+    const fieldsToCheck = (
+      fields ??
+      (Object.keys(REQUIRED_FIELD_LABELS) as (keyof FormFields)[])
+    ).filter((field) => field in REQUIRED_FIELD_LABELS);
 
-    for (const field of Object.keys(REQUIRED_FIELD_LABELS) as Array<
-      keyof FormFields
-    >) {
+    for (const field of fieldsToCheck) {
       if (!formData[field].trim()) {
         nextErrors[field] = REQUIRED_FIELD_LABELS[field];
       }
     }
 
-    if (formData.email.trim() && !EMAIL_REGEX.test(formData.email.trim())) {
+    if (
+      fieldsToCheck.includes("email") &&
+      formData.email.trim() &&
+      !EMAIL_REGEX.test(formData.email.trim())
+    ) {
       nextErrors.email = "Please enter a valid email address.";
     }
 
     return nextErrors;
   }
 
+  function focusFirstError(fieldErrors: FormErrors, fields: (keyof FormFields)[]) {
+    const firstInvalid = fields.find((field) => fieldErrors[field]);
+    if (!firstInvalid) return;
+    requestAnimationFrame(() => {
+      document.getElementById(focusTargetId(firstInvalid))?.focus();
+    });
+  }
+
+  function goToStep(nextStep: 1 | 2) {
+    setErrors({});
+    setStep(nextStep);
+    requestAnimationFrame(() => stepHeadingRef.current?.focus());
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setServerError(null);
 
+    if (step === 1) {
+      const step1Errors = validate(STEP_1_FIELDS);
+      setErrors(step1Errors);
+      if (Object.keys(step1Errors).length > 0) {
+        focusFirstError(step1Errors, STEP_1_FIELDS);
+        return;
+      }
+      goToStep(2);
+      return;
+    }
+
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) {
+      focusFirstError(validationErrors, STEP_2_FIELDS);
       return;
     }
 
@@ -144,7 +205,7 @@ export default function AuditForm() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="bg-white py-20 sm:py-28"
+      className="bg-white py-14 sm:py-20"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mb-10 text-center">
@@ -228,6 +289,31 @@ export default function AuditForm() {
                 </div>
               )}
 
+              <div>
+                <div className="flex gap-1.5" aria-hidden="true">
+                  <span
+                    className={`h-1 flex-1 rounded-full ${
+                      step >= 1 ? "bg-accent" : "bg-slate-200"
+                    }`}
+                  />
+                  <span
+                    className={`h-1 flex-1 rounded-full ${
+                      step >= 2 ? "bg-accent" : "bg-slate-200"
+                    }`}
+                  />
+                </div>
+                <h3
+                  ref={stepHeadingRef}
+                  tabIndex={-1}
+                  className="mt-3 text-sm font-semibold text-navy focus:outline-none"
+                >
+                  Step {step} of 2 —{" "}
+                  {step === 1 ? "About you" : "About the process"}
+                </h3>
+              </div>
+
+              {step === 1 && (
+              <>
               <Field
                 id="fullName"
                 label="Full name"
@@ -325,6 +411,57 @@ export default function AuditForm() {
                 />
               </Field>
 
+              <fieldset>
+                <legend className="mb-2 block text-sm font-semibold text-navy">
+                  Preferred contact method
+                  <span className="ml-1 text-red-500" aria-hidden="true">
+                    *
+                  </span>
+                  <span className="sr-only"> (required)</span>
+                </legend>
+                <div className="flex flex-wrap gap-x-6 gap-y-3">
+                  {CONTACT_METHOD_OPTIONS.map((option) => (
+                    <label
+                      key={option}
+                      htmlFor={`contactMethod-${option}`}
+                      className="flex items-center gap-2 text-base text-slate-700"
+                    >
+                      <input
+                        id={`contactMethod-${option}`}
+                        type="radio"
+                        name="contactMethod"
+                        value={option}
+                        required
+                        checked={formData.contactMethod === option}
+                        onChange={(e) =>
+                          updateField("contactMethod", e.target.value)
+                        }
+                        className="h-4 w-4 text-accent"
+                        aria-describedby={
+                          errors.contactMethod
+                            ? "contactMethod-error"
+                            : undefined
+                        }
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+                {errors.contactMethod && (
+                  <p
+                    id="contactMethod-error"
+                    role="alert"
+                    className="mt-1.5 text-sm text-red-600"
+                  >
+                    {errors.contactMethod}
+                  </p>
+                )}
+              </fieldset>
+              </>
+              )}
+
+              {step === 2 && (
+              <>
               <Field
                 id="industry"
                 label="Industry"
@@ -427,66 +564,34 @@ export default function AuditForm() {
                   ))}
                 </select>
               </Field>
+              </>
+              )}
 
-              <fieldset>
-                <legend className="mb-2 block text-sm font-semibold text-navy">
-                  Preferred contact method
-                  <span className="ml-1 text-red-500" aria-hidden="true">
-                    *
-                  </span>
-                  <span className="sr-only"> (required)</span>
-                </legend>
-                <div className="flex flex-wrap gap-x-6 gap-y-3">
-                  {CONTACT_METHOD_OPTIONS.map((option) => (
-                    <label
-                      key={option}
-                      htmlFor={`contactMethod-${option}`}
-                      className="flex items-center gap-2 text-base text-slate-700"
-                    >
-                      <input
-                        id={`contactMethod-${option}`}
-                        type="radio"
-                        name="contactMethod"
-                        value={option}
-                        required
-                        checked={formData.contactMethod === option}
-                        onChange={(e) =>
-                          updateField("contactMethod", e.target.value)
-                        }
-                        className="h-4 w-4 text-accent"
-                        aria-describedby={
-                          errors.contactMethod
-                            ? "contactMethod-error"
-                            : undefined
-                        }
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-                {errors.contactMethod && (
-                  <p
-                    id="contactMethod-error"
-                    role="alert"
-                    className="mt-1.5 text-sm text-red-600"
+              <div className="flex gap-3">
+                {step === 2 && (
+                  <button
+                    type="button"
+                    onClick={() => goToStep(1)}
+                    className="rounded-md border border-slate-300 px-6 py-3.5 text-base font-semibold text-navy transition-colors hover:bg-slate-100"
                   >
-                    {errors.contactMethod}
-                  </p>
+                    Back
+                  </button>
                 )}
-              </fieldset>
-
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-ink px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-navy disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                {status === "submitting" && (
-                  <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
-                )}
-                {status === "submitting"
-                  ? "Sending your request…"
-                  : "Book My Free Opportunity Review"}
-              </button>
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-md bg-ink px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-navy disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {status === "submitting" && (
+                    <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+                  )}
+                  {status === "submitting"
+                    ? "Sending your request…"
+                    : step === 1
+                      ? "Continue"
+                      : "Book My Free Opportunity Review"}
+                </button>
+              </div>
             </form>
           )}
         </Reveal>
