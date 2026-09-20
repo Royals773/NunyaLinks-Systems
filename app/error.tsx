@@ -14,7 +14,10 @@ export default function ErrorBoundary({
   }, [error]);
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center bg-background px-4 py-24 text-center">
+    <main
+      id="main-content"
+      className="flex flex-1 flex-col items-center justify-center bg-background px-4 py-24 text-center"
+    >
       <p className="text-sm font-semibold uppercase tracking-widest text-accent">
         Something went wrong
       </p>

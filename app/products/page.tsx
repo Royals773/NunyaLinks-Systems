@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <section className="bg-teal-deep py-20 text-white sm:py-24">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <Reveal>

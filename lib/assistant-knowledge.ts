@@ -9,9 +9,9 @@
 // assistant should say it doesn't have confirmed information rather than
 // guess.
 
-// Hero.tsx / WhatWeDo.tsx / FounderSection.tsx
+// Hero.tsx / WhatWeDo.tsx
 export const COMPANY_OVERVIEW =
-  "NunyaLink Systems builds AI-powered automations and mobile-first websites for SMEs. It finds the manual, repetitive work costing a business time — chasing enquiries, following up on payments, onboarding staff, updating records — and builds systems that do that work automatically, tailored to how the business already works and connected to the tools it already uses. NunyaLink is built by operators who have run the kind of business these workflows come from, not just studied them from outside.";
+  "NunyaLink Systems builds AI-powered automations and mobile-first websites for SMEs. It finds the manual, repetitive work costing a business time — chasing enquiries, following up on payments, onboarding staff, updating records — and builds systems that do that work automatically, tailored to how the business already works and connected to the tools it already uses.";
 
 // ProblemSection.tsx
 export const COMMON_PAIN_POINTS = [

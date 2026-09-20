@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, ImageOff } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { WorkItem } from "@/lib/work";
+import MediaPlaceholder from "../MediaPlaceholder";
 
 interface WorkCardProps {
   item: WorkItem;
@@ -12,13 +13,7 @@ export default function WorkCard({ item, className = "" }: WorkCardProps) {
     <li
       className={`flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md ${className}`}
     >
-      <div
-        className="flex h-36 flex-col items-center justify-center gap-1.5 border-b border-dashed border-slate-300 bg-slate-50 text-slate-400"
-        aria-hidden="true"
-      >
-        <ImageOff className="h-6 w-6" />
-        <p className="text-xs">Product visual to be added</p>
-      </div>
+      <MediaPlaceholder label={item.name} className="h-36" />
 
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-2">

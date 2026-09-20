@@ -90,7 +90,7 @@ export default function Packages() {
     <section
       id="packages"
       aria-labelledby="packages-heading"
-      className="bg-white py-20 sm:py-28"
+      className="bg-slate-50 py-20 sm:py-28"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <Reveal className="max-w-2xl">
@@ -116,7 +116,7 @@ export default function Packages() {
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {START_HERE.map((step, i) => (
             <Reveal key={step.title} delay={i * 60} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-ink/10 bg-slate-50 p-6 sm:p-8">
+              <div className="flex h-full flex-col rounded-2xl border border-ink/10 bg-white p-6 sm:p-8">
                 <div className="flex items-center gap-3">
                   <span
                     className="font-display flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white"

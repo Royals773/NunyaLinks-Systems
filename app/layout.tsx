@@ -87,6 +87,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
           }}
         />
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <Header />
         {children}
         <Footer />

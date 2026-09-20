@@ -3,7 +3,7 @@ import type { ProductStatus } from "@/lib/products";
 const STATUS_STYLES: Record<ProductStatus, string> = {
   live: "bg-teal text-white",
   beta: "border border-teal-bright/60 bg-teal-light text-teal-deep",
-  "coming-soon": "border border-slate-200 bg-slate-100 text-slate-500",
+  "coming-soon": "border border-slate-200 bg-slate-100 text-slate-600",
 };
 
 const DEFAULT_LABELS: Record<ProductStatus, string> = {
