@@ -4,17 +4,17 @@ const STEPS = [
   {
     title: "Free Automation Opportunity Review",
     description:
-      "A focused conversation to identify the process costing you the most time and money.",
+      "A focused conversation to identify the process costing you the most time and money — or to talk through the software you need built.",
   },
   {
     title: "Automation Audit & Roadmap",
     description:
-      "A paid, in-depth review of that process — ROI estimate, priorities and a fixed build quote.",
+      "A paid, in-depth review of that process or software idea — ROI estimate, priorities, a clear specification and a fixed build quote.",
   },
   {
     title: "Build",
     description:
-      "We build the automation, and any website it needs, using AI and proven tools.",
+      "We build the automation, website or software you need, using AI and proven tools.",
   },
   {
     title: "Test and launch",
@@ -24,7 +24,7 @@ const STEPS = [
   {
     title: "Maintain and expand",
     description:
-      "We monitor, maintain and improve, and find the next process to tackle.",
+      "We monitor, maintain and improve what we've built, and find the next thing to tackle.",
   },
 ];
 

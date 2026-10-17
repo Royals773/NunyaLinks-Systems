@@ -58,17 +58,17 @@ export const HOW_IT_WORKS = [
   {
     title: "Free Automation Opportunity Review",
     description:
-      "A focused conversation to identify the process costing you the most time and money.",
+      "A focused conversation to identify the process costing you the most time and money — or to talk through the software you need built.",
   },
   {
     title: "Automation Audit & Roadmap",
     description:
-      "A paid, in-depth review of that process — ROI estimate, priorities and a fixed build quote.",
+      "A paid, in-depth review of that process or software idea — ROI estimate, priorities, a clear specification and a fixed build quote.",
   },
   {
     title: "Build",
     description:
-      "NunyaLink builds the automation, and any website it needs, using AI and proven tools.",
+      "NunyaLink builds the automation, website or software needed, using AI and proven tools.",
   },
   {
     title: "Test and launch",
@@ -78,7 +78,7 @@ export const HOW_IT_WORKS = [
   {
     title: "Maintain and expand",
     description:
-      "NunyaLink monitors, maintains and improves, and finds the next process to tackle.",
+      "NunyaLink monitors, maintains and improves what it has built, and finds the next thing to tackle.",
   },
 ];
 
@@ -119,6 +119,12 @@ export const OFFERS = [
     tag: null,
     description:
       "For established SMEs who want their automations feeding a single operational view. Includes: multiple connected automations, a central dashboard for owners and managers, alerts and reporting across the business, multi-location and multi-currency support where needed, full retainer support.",
+  },
+  {
+    name: "Custom Software Build",
+    tag: null,
+    description:
+      "For businesses that need software built around how they work — a management system, CRM, client portal or SaaS platform. Includes: discovery and a clear specification, a fixed build quote before work starts, mobile-friendly design for the team and clients, role-based access for staff and clients, testing against real scenarios, launch, team handover and ongoing support.",
   },
 ];
 
