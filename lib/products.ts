@@ -59,6 +59,98 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
   {
+    // Facts below are taken from nlbusinessos.app's own published copy —
+    // keep the two in step if features or pricing change there.
+    slug: "nl-business-os",
+    name: "NL Business OS",
+    monogram: "NL",
+    tagline:
+      "Casework connected. Clients informed. From missing documents to a ready-to-upload pack.",
+    eyebrow: "Built for UK immigration advice practices",
+    description:
+      "Case management for UK immigration advice practices — request documents from clients, review what comes in, keep clients updated, and download an accepted pack ready for the application portal.",
+    longDescription: [
+      "NL Business OS is case management software built for UK immigration advice practices, from independent advisers to growing teams.",
+      "It takes the most time-consuming part of a case — getting the right documents from the client — and turns it into a clear process: request what's needed from inside the case, follow up on anything outstanding, review each file as it arrives, and download the accepted documents as a pack ready to upload to the application portal.",
+      "Clients get their own secure portal for updates and uploads, while case notes, staff review comments and drafts stay internal. Your practice keeps full control of advice and case decisions — the software organises the work around them.",
+    ],
+    features: [
+      "Document requests sent straight from the case",
+      "Follow-up reminders you check before sending",
+      "File review: accept, or ask for a clearer copy",
+      "Ready-to-upload ZIP pack with checklist",
+    ],
+    detailFeatures: [
+      {
+        title: "Document requests",
+        description:
+          "Build a request list from inside a case and send it to the client, so everyone knows exactly what's needed.",
+      },
+      {
+        title: "Follow-up reminders",
+        description:
+          "Reminders for outstanding items are drafted for you — you check them before anything is sent.",
+      },
+      {
+        title: "File review",
+        description:
+          "Accept each document as it arrives, or ask the client for a clearer copy, without losing track in email threads.",
+      },
+      {
+        title: "Ready-to-upload pack",
+        description:
+          "Download the accepted files as a ZIP with a checklist, ready to upload to the application portal.",
+      },
+      {
+        title: "Client portal and updates",
+        description:
+          "Clients with portal access see their updates and upload documents in one place. Access is tied to one verified email, and the practice can remove it at any time.",
+      },
+      {
+        title: "Internal notes stay internal",
+        description:
+          "Case notes, staff review comments and drafts are visible to your team only — never to clients.",
+      },
+    ],
+    howItWorks: [
+      {
+        title: "Open the case",
+        description:
+          "Set up the case and build the list of documents the client needs to provide.",
+      },
+      {
+        title: "Request and follow up",
+        description:
+          "Send the request to the client. Reminders for anything outstanding are drafted for you to check and send.",
+      },
+      {
+        title: "Review what arrives",
+        description:
+          "Accept each document, or ask the client for a clearer copy.",
+      },
+      {
+        title: "Download the pack",
+        description:
+          "Download the accepted files and checklist as a ZIP, ready for the application portal.",
+      },
+    ],
+    builtFor: [
+      "Independent immigration advisers",
+      "Immigration advice practices",
+      "Growing advice teams",
+    ],
+    pricing: {
+      summary: "From £39/month for founding practices",
+      note: "Founding practice pricing is locked for 24 months. Full pricing is on the NL Business OS website.",
+    },
+    status: "live",
+    cta: {
+      type: "visit",
+      label: "Book a demo",
+      href: "https://nlbusinessos.app",
+    },
+  },
+  {
     slug: "wealthcircle",
     name: "WealthCircle",
     monogram: "WC",

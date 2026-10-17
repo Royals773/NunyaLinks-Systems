@@ -11,7 +11,7 @@
 
 // Hero.tsx / WhatWeDo.tsx
 export const COMPANY_OVERVIEW =
-  "NunyaLink Systems builds AI-powered automations and mobile-first websites for SMEs. It finds the manual, repetitive work costing a business time — chasing enquiries, following up on payments, onboarding staff, updating records — and builds systems that do that work automatically, tailored to how the business already works and connected to the tools it already uses.";
+  "NunyaLink Systems builds AI-powered automations, mobile-first websites and custom software and SaaS platforms for SMEs. It finds the manual, repetitive work costing a business time — chasing enquiries, following up on payments, onboarding staff, updating records — and builds systems that do that work automatically, tailored to how the business already works and connected to the tools it already uses.";
 
 // ProblemSection.tsx
 export const COMMON_PAIN_POINTS = [
@@ -135,9 +135,9 @@ export const WHY_NUNYALINK = [
       "Systems are designed with data protection, access control and sensible handling of business information in mind.",
   },
   {
-    title: "You own the outcome, not a subscription trap",
+    title: "Built around your business, not the other way round",
     description:
-      "Automations and websites are built around the business and kept running, not locking anyone into software they'll never fully use.",
+      "Whether it's an automation, a website or a full software platform, it's built around how the business works and kept running — not locking anyone into tools they'll never fully use.",
   },
   {
     title: "We start small and expand",
@@ -145,6 +145,10 @@ export const WHY_NUNYALINK = [
       "Value is proven on one process first, then more is automated as the results speak for themselves.",
   },
 ];
+
+// CustomSoftware.tsx / lib/products.ts
+export const CUSTOM_SOFTWARE =
+  "NunyaLink also designs and builds custom software and SaaS platforms when the right tool doesn't exist: industry SaaS platforms built for one type of business, bespoke internal business software, and secure client and customer portals. Example: NL Business OS, case management software NunyaLink built for UK immigration advice practices — document requests, follow-up reminders, file review, a client portal, and a ready-to-upload document pack. Founding practices pay from £39 a month, locked for 24 months; demos are booked at nlbusinessos.app. Anyone wanting software built should use the free Opportunity Review form.";
 
 // WhoWeWorkWith.tsx
 export const WHO_WE_WORK_WITH = [
@@ -155,6 +159,7 @@ export const WHO_WE_WORK_WITH = [
   "Beauty, wellness & service providers",
   "Catering & event businesses",
   "Professional & business services",
+  "Immigration & legal advice practices",
   "Training & education providers",
   "Multi-location & remotely managed businesses",
 ];
