@@ -25,6 +25,11 @@ export const COMMON_PAIN_POINTS = [
 // WhatWeBuild.tsx
 export const WHAT_WE_BUILD = [
   {
+    title: "AI receptionist",
+    description:
+      "Answers calls and messages when the business can't, books appointments, captures every enquiry and hands anything urgent to a person.",
+  },
+  {
     title: "Enquiry and lead handling",
     description:
       "Where most engagements start: capture, sort and respond automatically so nothing's missed. Once this is running, everything else connects to it.",
@@ -101,6 +106,12 @@ export const OFFERS = [
     tag: "Entry point",
     description:
       "For SMEs who need a professional online presence and a proper way to capture enquiries — often the first step before automating what happens next. Includes: mobile-first website, service or product pages, structured enquiry forms that feed your systems, basic customer records, analytics setup, team handover.",
+  },
+  {
+    name: "AI Receptionist Setup",
+    tag: null,
+    description:
+      "For small businesses losing enquiries to missed calls, voicemail and slow replies — a receptionist that answers whenever the team can't. Includes: an AI receptionist set up for the business, its services and tone; answering calls; booking appointments into the calendar; capturing every enquiry into the business's records; handing urgent calls to a person; call summaries; testing, handover and 30 days post-launch support.",
   },
   {
     name: "First Automation",

@@ -5,6 +5,7 @@ import {
   RefreshCw,
   BarChart3,
   Globe,
+  PhoneCall,
 } from "lucide-react";
 import Reveal from "./Reveal";
 
@@ -16,6 +17,12 @@ const LEAD = {
 };
 
 const CONNECTED = [
+  {
+    icon: PhoneCall,
+    title: "AI receptionist",
+    description:
+      "Answers calls and messages when you can't, books appointments, captures every enquiry and hands anything urgent to a person.",
+  },
   {
     icon: BellRing,
     title: "Payments and reminders",
@@ -61,7 +68,7 @@ export default function WhatWeBuild() {
             What We Build
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
-            Six capabilities, one connected system — each one feeds the
+            Seven capabilities, one connected system — each one feeds the
             others rather than working in isolation.
           </p>
         </Reveal>
@@ -87,6 +94,8 @@ export default function WhatWeBuild() {
                   Feeds directly into
                 </p>
                 <p className="mt-2.5 text-sm leading-relaxed text-ink">
+                  AI receptionist
+                  <span className="text-accent"> · </span>
                   Payments
                   <span className="text-accent"> · </span>
                   Onboarding
