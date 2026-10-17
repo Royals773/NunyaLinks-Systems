@@ -7,6 +7,7 @@ import {
   validateAuditPayload,
   type AuditRequestPayload,
 } from "@/lib/audit";
+import { saveWebsiteLead } from "@/lib/admin/save-website-lead";
 // Type-only: erased at build time, so the task implementation (and its
 // OpenAI / Composio dependencies) is never bundled or registered inside
 // this route. Only @trigger.dev/sdk's lightweight HTTP client runs here.
@@ -169,6 +170,9 @@ export async function POST(request: Request) {
       { status: 400 }
     );
   }
+
+  // Record the enquiry in the NunyaLink Admin leads list. Never throws.
+  await saveWebsiteLead(data);
 
   try {
     const resend = getResendClient();

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Inter, Fraunces } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SiteChrome from "@/components/SiteChrome";
 import "./globals.css";
 
 // The only client component mounted on every route — code-split it out
@@ -90,10 +91,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <Header />
+        <SiteChrome>
+          <Header />
+        </SiteChrome>
         {children}
-        <Footer />
-        <AssistantWidget />
+        <SiteChrome>
+          <Footer />
+          <AssistantWidget />
+        </SiteChrome>
       </body>
     </html>
   );
