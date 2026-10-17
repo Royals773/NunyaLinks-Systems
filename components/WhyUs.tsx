@@ -17,9 +17,9 @@ const SUPPORTING = [
   },
   {
     icon: KeyRound,
-    title: "You own the outcome, not a subscription trap",
+    title: "Built around your business, not the other way round",
     description:
-      "We build automations and websites around your business and keep them running, not lock you into software you'll never fully use.",
+      "Whether it's an automation, a website or a full software platform, we build it around how you work and keep it running — not lock you into tools you'll never fully use.",
   },
   {
     icon: Sprout,

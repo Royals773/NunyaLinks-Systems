@@ -42,6 +42,9 @@ export default function Footer() {
           <Link href="/#what-we-do" className="hover:text-white">
             What We Do
           </Link>
+          <Link href="/#software" className="hover:text-white">
+            Software
+          </Link>
           <Link href="/#how-it-works" className="hover:text-white">
             How It Works
           </Link>

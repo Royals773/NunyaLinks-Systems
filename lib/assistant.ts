@@ -13,6 +13,7 @@ import {
   OFFERS,
   WHY_NUNYALINK,
   WHO_WE_WORK_WITH,
+  CUSTOM_SOFTWARE,
   CONTACT,
 } from "./assistant-knowledge";
 import { MAX_MESSAGE_LENGTH, MAX_MESSAGES } from "./assistant-limits";
@@ -124,6 +125,9 @@ ${formatList(COMMON_PAIN_POINTS)}
 
 What NunyaLink builds:
 ${formatTitledList(WHAT_WE_BUILD)}
+
+Custom software and SaaS:
+${CUSTOM_SOFTWARE}
 
 Services and packages (use these exact names):
 ${formatOffers()}

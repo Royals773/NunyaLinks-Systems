@@ -11,6 +11,7 @@ import { Logo } from "./Logo";
 // active state based on the current pathname — see isActive below.
 const NAV_LINKS = [
   { label: "What We Do", href: "/#what-we-do" },
+  { label: "Software", href: "/#software" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Packages", href: "/#packages" },
   { label: "Why NunyaLink", href: "/#why-nunyalink" },

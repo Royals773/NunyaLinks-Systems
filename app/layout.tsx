@@ -31,7 +31,7 @@ const siteUrl =
 
 const title = "NunyaLink Systems — Automate the busywork. Run the business.";
 const description =
-  "AI automation systems and mobile-first websites for SMEs. We find the work that's costing you, prove what it's worth to fix, and build the system that does it.";
+  "AI automation, mobile-first websites and custom software for SMEs. We find the work that's costing you, prove what it's worth to fix, and build the system that does it.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

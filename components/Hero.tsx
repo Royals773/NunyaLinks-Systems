@@ -21,8 +21,8 @@ export default function Hero() {
             Stop running your business on manual work.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-700">
-            NunyaLink builds AI-powered automations and mobile-first websites
-            that handle the repetitive tasks eating your week — chasing
+            NunyaLink builds AI-powered automations, mobile-first websites and
+            custom software that handle the repetitive tasks eating your week — chasing
             enquiries, following up on payments, onboarding staff, updating
             records — so your team can focus on the work that actually grows
             the business.

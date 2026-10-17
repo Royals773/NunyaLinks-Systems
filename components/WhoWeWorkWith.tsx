@@ -8,6 +8,7 @@ const INDUSTRIES = [
   "Beauty, wellness & service providers",
   "Catering & event businesses",
   "Professional & business services",
+  "Immigration & legal advice practices",
   "Training & education providers",
   "Multi-location & remotely managed businesses",
 ];

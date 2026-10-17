@@ -22,9 +22,9 @@ export default function ProductsPage() {
               Products
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-200">
-              Alongside bespoke automations and websites, we build and sell
-              standalone SaaS products — software your business (or
-              community) can put to work directly.
+              Alongside bespoke automations, websites and custom software,
+              we build and sell our own SaaS products — software your
+              business (or community) can put to work directly.
             </p>
           </Reveal>
         </div>
