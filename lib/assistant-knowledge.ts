@@ -148,7 +148,7 @@ export const WHY_NUNYALINK = [
 
 // CustomSoftware.tsx / lib/products.ts
 export const CUSTOM_SOFTWARE =
-  "NunyaLink also designs and builds custom software and SaaS platforms when the right tool doesn't exist: industry SaaS platforms built for one type of business, bespoke internal business software, and secure client and customer portals. Example: NL Business OS, case management software NunyaLink built for UK immigration advice practices — document requests, follow-up reminders, file review, a client portal, and a ready-to-upload document pack. Founding practices pay from £39 a month, locked for 24 months; demos are booked at nlbusinessos.app. Anyone wanting software built should use the free Opportunity Review form.";
+  "NunyaLink also designs and builds custom software and SaaS platforms when the right tool doesn't exist: management systems (case, job, staff and operations management), CRMs (customer and client relationship systems), SaaS platforms built for one type of business, and secure client and customer portals. Example: NL Business OS, case management software NunyaLink built for UK immigration advice practices — document requests, follow-up reminders, file review, a client portal, and a ready-to-upload document pack. Founding practices pay from £39 a month, locked for 24 months; demos are booked at nlbusinessos.app. Anyone wanting software built should use the free Opportunity Review form.";
 
 // WhoWeWorkWith.tsx
 export const WHO_WE_WORK_WITH = [

@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Layers, Code2, UsersRound, Check } from "lucide-react";
+import {
+  ArrowRight,
+  Layers,
+  LayoutDashboard,
+  Contact,
+  UsersRound,
+  Check,
+} from "lucide-react";
 import Reveal from "./Reveal";
 import { getProductBySlug } from "@/lib/products";
 
@@ -9,16 +16,22 @@ import { getProductBySlug } from "@/lib/products";
 
 const OFFERINGS = [
   {
-    icon: Layers,
-    title: "Industry SaaS platforms",
+    icon: LayoutDashboard,
+    title: "Management systems",
     description:
-      "Subscription software built for one type of business and the way it actually works — its workflows, its compliance and its clients.",
+      "Case, job, staff and operations management software built around your processes — not generic tools you have to work around.",
   },
   {
-    icon: Code2,
-    title: "Bespoke business software",
+    icon: Contact,
+    title: "CRMs",
     description:
-      "Internal systems built around your processes when off-the-shelf tools force you to work around them.",
+      "Customer and client relationship systems that track every enquiry, conversation and next step in one place, shaped to how you sell and serve.",
+  },
+  {
+    icon: Layers,
+    title: "SaaS platforms",
+    description:
+      "Subscription software built for one type of business and the way it actually works — its workflows, its compliance and its clients.",
   },
   {
     icon: UsersRound,
@@ -52,8 +65,9 @@ export default function CustomSoftware() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
             Some problems need more than an automation. We design and build
-            custom software and SaaS platforms — from a system for your own
-            team to a product an entire industry can subscribe to.
+            custom software — management systems, CRMs, client portals and
+            SaaS platforms — from a system for your own team to a product an
+            entire industry can subscribe to.
           </p>
         </Reveal>
 
