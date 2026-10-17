@@ -46,6 +46,20 @@ const EXPAND_PACKAGES: Package[] = [
     ],
   },
   {
+    title: "AI Receptionist Setup",
+    audience:
+      "For small businesses losing enquiries to missed calls, voicemail and slow replies — a receptionist that answers whenever you can't.",
+    includes: [
+      "AI receptionist set up for your business, services and tone",
+      "Answers calls and website or WhatsApp messages",
+      "Books appointments into your calendar",
+      "Captures every enquiry into your records",
+      "Hands urgent calls to a person",
+      "Call summaries sent to you",
+      "Testing, handover and 30 days post-launch support",
+    ],
+  },
+  {
     title: "First Automation",
     audience:
       "For SMEs ready to automate one high-value process and see the results.",
