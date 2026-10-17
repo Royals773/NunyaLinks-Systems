@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@composio/core": "^0.17.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
     "@trigger.dev/sdk": "^4.5.12",
     "lucide-react": "^1.29.0",
     "next": "16.3.0",
@@ -17,6 +19,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "resend": "^6.18.1",
+    "server-only": "0.0.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
