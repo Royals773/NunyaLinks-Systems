@@ -143,7 +143,7 @@ ${formatList(WHO_WE_WORK_WITH)}
 
 Contact: the free Automation Opportunity Review form is on this website; visitors can also email ${CONTACT.enquiriesEmail}.
 
-Apart from the published NL Business OS founding price above, nothing above states prices, timelines, guarantees, integrations, named clients or results — because none of those are published facts you have. Do not invent them.`;
+Nothing above states prices, timelines, guarantees, integrations, named clients or results — because none of those are published facts you have. Do not invent them.`;
 }
 
 const ROLE_LABELS: Record<ChatMessage["role"], string> = {

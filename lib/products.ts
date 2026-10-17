@@ -140,8 +140,8 @@ export const PRODUCTS: Product[] = [
       "Growing advice teams",
     ],
     pricing: {
-      summary: "From £39/month for founding practices",
-      note: "Founding practice pricing is locked for 24 months. Full pricing is on the NL Business OS website.",
+      summary: "Book a demo for pricing",
+      note: "Book a 20-minute demo on sample data and we'll walk you through pricing for your practice.",
     },
     status: "live",
     cta: {
