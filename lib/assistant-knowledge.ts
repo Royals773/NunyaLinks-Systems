@@ -111,7 +111,7 @@ export const OFFERS = [
     name: "AI Receptionist Setup",
     tag: null,
     description:
-      "For small businesses losing enquiries to missed calls, voicemail and slow replies — a receptionist that answers whenever the team can't. Includes: an AI receptionist set up for the business, its services and tone; answering calls and website or WhatsApp messages; booking appointments into the calendar; capturing every enquiry into the business's records; handing urgent calls to a person; call summaries; testing, handover and 30 days post-launch support.",
+      "For small businesses losing enquiries to missed calls, voicemail and slow replies — a receptionist that answers whenever the team can't. Includes: an AI receptionist set up for the business, its services and tone; answering calls; booking appointments into the calendar; capturing every enquiry into the business's records; handing urgent calls to a person; call summaries; testing, handover and 30 days post-launch support.",
   },
   {
     name: "First Automation",

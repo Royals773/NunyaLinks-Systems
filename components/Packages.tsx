@@ -51,7 +51,7 @@ const EXPAND_PACKAGES: Package[] = [
       "For small businesses losing enquiries to missed calls, voicemail and slow replies — a receptionist that answers whenever you can't.",
     includes: [
       "AI receptionist set up for your business, services and tone",
-      "Answers calls and website or WhatsApp messages",
+      "Answers calls",
       "Books appointments into your calendar",
       "Captures every enquiry into your records",
       "Hands urgent calls to a person",
