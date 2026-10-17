@@ -83,6 +83,19 @@ const EXPAND_PACKAGES: Package[] = [
       "Full retainer support",
     ],
   },
+  {
+    title: "Custom Software Build",
+    audience:
+      "For businesses that need software built around how they work — a management system, CRM, client portal or SaaS platform.",
+    includes: [
+      "Discovery and a clear specification",
+      "Fixed build quote before work starts",
+      "Mobile-friendly design for your team and clients",
+      "Role-based access for staff and clients",
+      "Testing against real scenarios",
+      "Launch, team handover and ongoing support",
+    ],
+  },
 ];
 
 export default function Packages() {
@@ -101,8 +114,9 @@ export default function Packages() {
             Packages
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
-            Every engagement starts with a free review. From there, build
-            and expand at your own pace.
+            Every engagement starts with a free review — whether you want a
+            process automated or software built. From there, build and expand
+            at your own pace.
           </p>
         </Reveal>
 
