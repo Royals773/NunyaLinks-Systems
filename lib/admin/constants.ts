@@ -69,3 +69,17 @@ export function findOption(options: Option[], value: string | null | undefined) 
 export function values(options: Option[]) {
   return options.map((o) => o.value) as [string, ...string[]];
 }
+
+export const DOCUMENT_KINDS: Option[] = [
+  { value: "proposal", label: "Proposal", tone: "blue" },
+  { value: "contract", label: "Contract", tone: "teal" },
+];
+
+export const DOCUMENT_STATUSES: Option[] = [
+  { value: "draft", label: "Draft", tone: "slate" },
+  { value: "sent", label: "Sent", tone: "blue" },
+  { value: "accepted", label: "Accepted", tone: "green" },
+  { value: "signed", label: "Signed", tone: "green" },
+  { value: "declined", label: "Declined", tone: "red" },
+  { value: "cancelled", label: "Cancelled", tone: "slate" },
+];

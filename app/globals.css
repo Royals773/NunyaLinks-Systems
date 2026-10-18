@@ -137,3 +137,19 @@ section[id] {
     opacity: 1;
   }
 }
+
+/* Admin documents: unfilled [notes] and {{placeholders}} stand out on screen
+   so they're filled in before sending, but print as plain text. */
+.doc-placeholder {
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+@media print {
+  .doc-placeholder {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+}

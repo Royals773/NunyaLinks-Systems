@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Inbox, Building2, FolderKanban, FileText, Receipt } from "lucide-react";
+import { LayoutDashboard, Inbox, Building2, FolderKanban, FileText, Receipt, FileSignature, Settings } from "lucide-react";
 
 const LINKS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
@@ -11,6 +11,8 @@ const LINKS = [
   { href: "/admin/projects", label: "Projects", icon: FolderKanban },
   { href: "/admin/quotes", label: "Quotes", icon: FileText },
   { href: "/admin/invoices", label: "Invoices", icon: Receipt },
+  { href: "/admin/documents", label: "Proposals & contracts", icon: FileSignature },
+  { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
 export default function AdminNav() {

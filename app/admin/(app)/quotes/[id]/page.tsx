@@ -55,6 +55,8 @@ export default async function QuotePage({ params }: PageProps<"/admin/quotes/[id
         actions={
           <>
             <ButtonLink href={`/admin/print/quotes/${quote.id}`} variant="secondary">Print / PDF</ButtonLink>
+            <ButtonLink href={`/admin/documents/new?kind=proposal&quote=${quote.id}`} variant="secondary">Create proposal</ButtonLink>
+            <ButtonLink href={`/admin/documents/new?kind=contract&quote=${quote.id}`} variant="secondary">Create contract</ButtonLink>
             {invoices?.length ? (
               <ButtonLink href={`/admin/invoices/${invoices[0].id}`}>Open {invoices[0].invoice_number}</ButtonLink>
             ) : (

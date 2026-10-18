@@ -40,6 +40,7 @@ export default async function LeadPage({ params }: PageProps<"/admin/leads/[id]"
         actions={
           <>
             <ButtonLink href={`/admin/quotes/new?lead=${lead.id}`} variant="secondary">Create quote</ButtonLink>
+            <ButtonLink href={`/admin/documents/new?kind=proposal&lead=${lead.id}`} variant="secondary">Create proposal</ButtonLink>
             {client ? (
               <ButtonLink href={`/admin/clients/${client.id}`}>Open client</ButtonLink>
             ) : (
