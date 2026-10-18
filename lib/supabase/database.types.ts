@@ -59,6 +59,24 @@ export type Database = {
         Update: {id?: string; invoice_id?: string; position?: number; description?: string; quantity?: number; unit_price_pence?: number; };
         Relationships: [{ foreignKeyName: "invoice_items_invoice_id_fkey"; columns: ["invoice_id"]; isOneToOne: false; referencedRelation: "invoices"; referencedColumns: ["id"] },];
       };
+      business_settings: {
+        Row: {id: boolean; updated_at: string; trading_name: string | null; legal_name: string | null; company_number: string | null; address: string | null; email: string | null; phone: string | null; website: string | null; vat_number: string | null; signatory_name: string | null; signatory_title: string | null; payment_terms: string | null; bank_details: string | null; };
+        Insert: {id?: boolean; updated_at?: string; trading_name?: string | null; legal_name?: string | null; company_number?: string | null; address?: string | null; email?: string | null; phone?: string | null; website?: string | null; vat_number?: string | null; signatory_name?: string | null; signatory_title?: string | null; payment_terms?: string | null; bank_details?: string | null; };
+        Update: {id?: boolean; updated_at?: string; trading_name?: string | null; legal_name?: string | null; company_number?: string | null; address?: string | null; email?: string | null; phone?: string | null; website?: string | null; vat_number?: string | null; signatory_name?: string | null; signatory_title?: string | null; payment_terms?: string | null; bank_details?: string | null; };
+        Relationships: [];
+      };
+      document_templates: {
+        Row: {id: string; created_at: string; updated_at: string; kind: string; name: string; body: string; is_default: boolean; };
+        Insert: {id?: string; created_at?: string; updated_at?: string; kind: string; name: string; body?: string; is_default?: boolean; };
+        Update: {id?: string; created_at?: string; updated_at?: string; kind?: string; name?: string; body?: string; is_default?: boolean; };
+        Relationships: [];
+      };
+      documents: {
+        Row: {id: string; created_at: string; updated_at: string; kind: string; doc_number: string; title: string; status: string; client_id: string | null; lead_id: string | null; quote_id: string | null; project_id: string | null; template_id: string | null; body: string; };
+        Insert: {id?: string; created_at?: string; updated_at?: string; kind: string; doc_number?: string; title: string; status?: string; client_id?: string | null; lead_id?: string | null; quote_id?: string | null; project_id?: string | null; template_id?: string | null; body?: string; };
+        Update: {id?: string; created_at?: string; updated_at?: string; kind?: string; doc_number?: string; title?: string; status?: string; client_id?: string | null; lead_id?: string | null; quote_id?: string | null; project_id?: string | null; template_id?: string | null; body?: string; };
+        Relationships: [{ foreignKeyName: "documents_client_id_fkey"; columns: ["client_id"]; isOneToOne: false; referencedRelation: "clients"; referencedColumns: ["id"] }, { foreignKeyName: "documents_lead_id_fkey"; columns: ["lead_id"]; isOneToOne: false; referencedRelation: "leads"; referencedColumns: ["id"] }, { foreignKeyName: "documents_quote_id_fkey"; columns: ["quote_id"]; isOneToOne: false; referencedRelation: "quotes"; referencedColumns: ["id"] }, { foreignKeyName: "documents_project_id_fkey"; columns: ["project_id"]; isOneToOne: false; referencedRelation: "projects"; referencedColumns: ["id"] }, { foreignKeyName: "documents_template_id_fkey"; columns: ["template_id"]; isOneToOne: false; referencedRelation: "document_templates"; referencedColumns: ["id"] },];
+      };
     };
     Views: { [_ in never]: never };
     Functions: {

@@ -51,6 +51,7 @@ export default async function ClientPage({ params }: PageProps<"/admin/clients/[
           <>
             <ButtonLink href={`/admin/projects/new?client=${client.id}`} variant="secondary">New project</ButtonLink>
             <ButtonLink href={`/admin/quotes/new?client=${client.id}`} variant="secondary">New quote</ButtonLink>
+            <ButtonLink href={`/admin/documents/new?kind=contract&client=${client.id}`} variant="secondary">New contract</ButtonLink>
             <ButtonLink href={`/admin/invoices/new?client=${client.id}`}>New invoice</ButtonLink>
           </>
         }

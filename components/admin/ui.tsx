@@ -215,10 +215,12 @@ export function FilterTabs({
   base,
   current,
   options,
+  param = "status",
 }: {
   base: string;
   current?: string;
   options: { value: string; label: string }[];
+  param?: string;
 }) {
   const all = [{ value: "", label: "All" }, ...options];
   return (
@@ -228,7 +230,7 @@ export function FilterTabs({
         return (
           <Link
             key={o.value || "all"}
-            href={o.value ? `${base}?status=${o.value}` : base}
+            href={o.value ? `${base}?${param}=${o.value}` : base}
             aria-current={active ? "page" : undefined}
             className={`rounded-full px-3 py-1 text-sm font-medium ${
               active ? "bg-ink text-white" : "bg-white text-slate-600 ring-1 ring-slate-200 hover:text-ink"
